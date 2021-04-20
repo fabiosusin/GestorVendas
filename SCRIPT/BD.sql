@@ -75,18 +75,18 @@ CREATE TABLE ItemPedido (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE Perfil (
+    id int NOT NULL AUTO_INCREMENT,
+	nome VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE Usuarios (
     id int NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(255) NOT NULL,
     login VARCHAR(255) NOT NULL,
 	senha VARCHAR(100) NOT NULL,
 	perfilID int NOT NULL,
-	FOREIGN KEY (Perfil) REFERENCES Perfil(id),
+	FOREIGN KEY (PerfilID) REFERENCES Perfil(id),
 	PRIMARY KEY (id)
-);
-
-CREATE TABLE Perfil (
-    id int NOT NULL AUTO_INCREMENT,
-	nome VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
 );
