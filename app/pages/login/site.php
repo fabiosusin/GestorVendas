@@ -34,6 +34,7 @@ $logado = $_SESSION['login'];
   <tr>
     <td width="103" height="410" bgcolor="#CCCCCC">MENU AQUI</td>
     <a href="logout.php">Logout</a>
+    <a href="cadastra_cliente.php"> Cadastra Cliente</a>
     <td width="546">CONTEUDO E ICONES AQUI</td>
   </tr>
   <tr>

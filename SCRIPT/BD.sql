@@ -25,8 +25,8 @@ CREATE TABLE Endereco (
 	cep varchar(20),
 	cidade varchar(100),
 	estado char(2),
-	ClienteID int NOT NULL,
-	FornecedorID int NOT NULL,
+	ClienteID int,
+	FornecedorID int,
 	PRIMARY KEY (id),
     FOREIGN KEY (ClienteID) REFERENCES Cliente(id),
 	FOREIGN KEY (FornecedorID) REFERENCES Fornecedor(id)	
