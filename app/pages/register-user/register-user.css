@@ -1,58 +1,7 @@
-.login-page {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: var(--background-color);
-}
-.login-page form {
-    background: var(--background-color-brighter);
-    padding: 50px;
-    width: 300px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    border-radius: 5px;
-}
-.login-page form * {
-    width: 100%;
-    color: #fff;
-    font-weight: bold;
+.form {
+    height: 400px;
 }
 
-.login-page form .input-with-icon {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.login-page form .input-with-icon i {
-    position: absolute;
-    top: 40%;
-    left: 15px;
-    color: var(--background-color-brighter);
-}
-.login-page form .input-with-icon input {
-    height: 30px;
-    padding: 5px;
-    padding-left: 40px;
-    border-radius: 5px;
-    background: var(--background-color);
-}
-.login-page form a {
-    color: var(--main-color);
-}
-.login-page form button {
-    height: 40px;
-    background: var(--main-color);
-    border-radius: 5px;
-}
-.login-page form p {
-    margin-top: 10px;
-    font-weight: 600;
+.extendForm {
+    height: 500px;
 }
