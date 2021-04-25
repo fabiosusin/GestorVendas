@@ -1,5 +1,5 @@
 ﻿(function($, $sl) {
-    const appName = 'registerUser';
+    const appName = 'registerProvider';
     $sl.apps.register = $sl.apps.register || {};
     let pb = $sl.apps.register.user = () => {
         main.init();
@@ -30,12 +30,10 @@
     main.onClickAddress = () => {
         main.onClickRemoveCss();
         main.onClickHideDiv();
-        main.$container('.form').addClass('extendForm');
         main.$container('[name="address"]').addClass('active');
         main.$container('[name="address-info"]').css({ 'display': 'flex' });
     }
     main.onClickRemoveCss = function() {
-        main.$container('.form').removeClass('extendForm');
         main.$container('.tablinks').removeClass('active');
     }
     main.onClickHideDiv = function() {
