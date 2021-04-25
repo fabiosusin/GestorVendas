@@ -1,6 +1,6 @@
 <?php
 
-include '../../conexao/conexao.php';
+include '../conexao/conexao.php';
 
 $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
@@ -19,13 +19,14 @@ mysqli_query($conexao, $query_cliente);
 
 if ($query_cliente == true) {
 	$last_id = mysqli_insert_id($conexao);
-	
-	$query = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
-  	mysqli_query($conexao, $query);
-} 
 
-else {
-  echo "SQL ERROR " . mysqli_error($conexao);
+	$query = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
+	mysqli_query($conexao, $query);
+} else {
+	echo "SQL ERROR " . mysqli_error($conexao);
 }
 
-header('location:cadastra_cliente.php');
+header('location:../../pages/register-user/register-user.php');
+
+
+?>
