@@ -1,7 +1,7 @@
 <?php
-$page_title = 'Cadastro de Cliente';
-$page_css_links = ['register-user/register-user.css'];
-$page_scripts_links = ['register-user/register-user.js'];
+$page_title = 'Cadastro de Fornecedor';
+$page_css_links = ['register-provider/register-provider.css'];
+$page_scripts_links = ['register-provider/register-provider.js'];
 
 session_start();
 
@@ -14,12 +14,12 @@ if ((isset($_SESSION['login']) == true) and (isset($_SESSION['senha']) == true))
 include_once("../base/header.php");
 ?>
 
-<div class="register-user" name="registerUser">
+<div class="register-provider" name="registerProvider">
   <div class="tab">
     <button type="button" class="tablinks" name="personal-data">Dados Pessoais</button>
     <button type="button" class="tablinks" name="address">Endereço</button>
   </div>
-  <form class="form" method="post" action="../../scripts/register-user/insert_cliente.php">
+  <form class="form" method="post" action="../../scripts/register-provider/insert_cliente.php">
     <div name="personal-data-info" class="template">
       <div class="col-md-12 input-with-icon">
         <i class="fas fa-lock icon"></i>
@@ -33,9 +33,9 @@ include_once("../base/header.php");
         <i class="fas fa-lock icon"></i>
         <input class="default-input" type="password" placeholder="Senha" name="senha" />
       </div>
-      <div class="col-md-12 input-with-icon">
+      <div class="col-md-12 textarea-with-icon">
         <i class="fas fa-credit-card icon"></i>
-        <input class="default-input" type="text" name="cartao" class="form-control" id="cartao" placeholder="Cartão de Crédito">
+        <textarea class="default-textarea" type="text" name="descricao" class="form-control" id="descricao" placeholder="Descrição"></textarea>
       </div>
       <div class="col-md-12 input-with-icon">
         <i class="fas fa-phone-alt icon"></i>

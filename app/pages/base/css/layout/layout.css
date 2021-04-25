@@ -70,7 +70,7 @@ body {
     background: var(--background-color-brighter);
     padding: 50px 30px;
     width: 400px;
-    height: 300px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,6 +84,7 @@ body {
     font-weight: bold;
 }
 
+.form .textarea-with-icon,
 .form .input-with-icon {
     position: relative;
     display: flex;
@@ -92,6 +93,7 @@ body {
     flex-wrap: wrap;
 }
 
+.form .textarea-with-icon .icon,
 .form .input-with-icon .icon {
     position: absolute;
     width: 20px;
@@ -100,12 +102,25 @@ body {
     color: var(--background-color-brighter);
 }
 
+.form .textarea-with-icon .icon {
+    top: 12%;
+}
+
+.form .textarea-with-icon .default-textarea,
 .form .input-with-icon .default-input {
     height: 40px;
     padding: 5px;
     padding-left: 40px;
     border-radius: 5px;
     background: var(--background-color);
+}
+
+.form .textarea-with-icon .default-textarea {
+    padding-top: 10px;
+    height: 130px;
+    min-height: 130px;
+    max-height: 130px;
+    resize: none;
 }
 
 .form .default-button {
@@ -116,3 +131,9 @@ body {
 
 
 /* #end-region */
+
+@media (max-width: 700px) {
+    .form {
+        width: 100%;
+    }
+}
