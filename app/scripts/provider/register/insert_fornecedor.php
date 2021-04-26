@@ -1,6 +1,6 @@
 <?php
 
-include '../../scripts/conexao/conexao.php';
+include '../../../scripts/conexao/conexao.php';
 
 $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
@@ -26,7 +26,9 @@ if ($query_fornecedor == true) {
 	echo "SQL ERROR " . mysqli_error($conexao);
 }
 
-header('location:../../pages/register-provider/register-provider.php');
+$query_updateFornecedor = "UPDATE fornecedor SET nome='$nome', descricao='$description', foto='', FornecedorID='$providerId' WHERE id = $id";
+    mysqli_query($conexao, $query_updateFornecedor);
 
+header('location:/gestorvendas/app/pages/provider/register/register-provider.php');
 
 ?>

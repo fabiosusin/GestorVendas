@@ -3,7 +3,7 @@ $page_title = 'Cadastro de Produto';
 $page_css_links = ['product/register/register-product.css'];
 
 include_once("../../base/header.php");
-include '../../../scripts/provider/register/get_provider.php';
+include '../../../scripts/product/register/get_product.php';
 
 ?>
 

@@ -1,17 +1,19 @@
 <?php
 $page_title = 'Cadastro de Fornecedor';
-$page_css_links = ['register-provider/register-provider.css'];
-$page_scripts_links = ['register-provider/register-provider.js'];
+$page_css_links = ['register/register-provider.css'];
+$page_scripts_links = ['provider/register-provider.js'];
 
-session_start();
+include '../../../scripts/provider/register/get_provider.php';
+
+/*session_start();
 
 if ((isset($_SESSION['login']) == true) and (isset($_SESSION['senha']) == true)) {
   unset($_SESSION['login']);
   unset($_SESSION['senha']);
   header('location:../login/login.php');
-}
+}*/
 
-include_once("../base/header.php");
+include_once("../../base/header.php");
 ?>
 
 <div class="register-provider" name="registerProvider">
@@ -19,7 +21,7 @@ include_once("../base/header.php");
     <button type="button" class="tablinks" name="personal-data">Dados Pessoais</button>
     <button type="button" class="tablinks" name="address">Endereço</button>
   </div>
-  <form class="form" method="post" action="../../scripts/register-provider/insert_fornecedor.php">
+  <form class="form" method="post" action="../../../scripts/provider/register/insert_fornecedor.php">
     <div name="personal-data-info" class="template">
       <div class="col-md-12 input-with-icon">
         <i class="fas fa-lock icon"></i>
@@ -98,7 +100,6 @@ include_once("../base/header.php");
         <input class="default-input" type="text" name="cep" class="form-control" id="cep" placeholder="CEP">
       </div>
     </div>
-
     <div class="col-md-12">
       <button type="submit" class="col-md-12 default-button">Salvar</button>
     </div>
@@ -106,5 +107,5 @@ include_once("../base/header.php");
 </div>
 
 <?php
-include_once("../base/footer.php");
+include_once("../../base/footer.php");
 ?>
