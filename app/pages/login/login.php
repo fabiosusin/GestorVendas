@@ -6,7 +6,7 @@ include_once("../base/header.php");
 ?>
 
 <div class="login-page">
-  <form class="form" method="post" action="valida_login.php">
+  <form class="form" method="post" action="../../scripts/login/valida_login.php">
     <div class="col-md-12 input-with-icon">
       <i class="fas fa-envelope icon"></i>
       <input class="default-input" type="text" placeholder="Email" name="usuario" />

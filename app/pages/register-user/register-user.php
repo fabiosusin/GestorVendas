@@ -30,10 +30,6 @@ include_once("../base/header.php");
         <input class="default-input" type="text" class="form-control" name="email" id="email" placeholder="Email">
       </div>
       <div class="col-md-12 input-with-icon">
-        <i class="fas fa-lock icon"></i>
-        <input class="default-input" type="password" placeholder="Senha" name="senha" />
-      </div>
-      <div class="col-md-12 input-with-icon">
         <i class="fas fa-credit-card icon"></i>
         <input class="default-input" type="text" name="cartao" class="form-control" id="cartao" placeholder="Cartão de Crédito">
       </div>

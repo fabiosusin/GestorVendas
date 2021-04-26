@@ -1,6 +1,6 @@
 <?php 
 
-include '../../conexao/conexao.php';
+include '../../scripts/conexao/conexao.php';
 
 $usuario = addslashes($_POST['usuario']);
 $senha = addslashes($_POST['senha']);
@@ -14,7 +14,7 @@ if(mysqli_num_rows($consulta) == 1){
 	$_SESSION['login'] = true;
 	$_SESSION['usuario'] = $usuario;
 
-	header('location:site.php');
+	header('location:../../pages/home/site.php');
 }
 else{
 	header('location:login.php');

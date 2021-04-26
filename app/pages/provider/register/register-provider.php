@@ -19,7 +19,7 @@ include_once("../base/header.php");
     <button type="button" class="tablinks" name="personal-data">Dados Pessoais</button>
     <button type="button" class="tablinks" name="address">Endereço</button>
   </div>
-  <form class="form" method="post" action="../../scripts/register-provider/insert_cliente.php">
+  <form class="form" method="post" action="../../scripts/register-provider/insert_fornecedor.php">
     <div name="personal-data-info" class="template">
       <div class="col-md-12 input-with-icon">
         <i class="fas fa-lock icon"></i>
@@ -28,10 +28,6 @@ include_once("../base/header.php");
       <div class="col-md-12 input-with-icon">
         <i class="fas fa-envelope icon"></i>
         <input class="default-input" type="text" class="form-control" name="email" id="email" placeholder="Email">
-      </div>
-      <div class="col-md-12 input-with-icon">
-        <i class="fas fa-lock icon"></i>
-        <input class="default-input" type="password" placeholder="Senha" name="senha" />
       </div>
       <div class="col-md-12 textarea-with-icon">
         <i class="fas fa-credit-card icon"></i>
