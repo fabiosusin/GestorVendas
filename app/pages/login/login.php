@@ -20,7 +20,7 @@ include_once("../base/header.php");
       <button class="col-md-12 default-button">ENTRAR</button>
     </div>
 
-    <p class="col-md-12 text">Não tem conta? <a class="green-text">Então Registre-se</a></p>
+    <p class="col-md-12 text">Não tem conta? <a class="green-text" href="../../pages/user/register/register-user.php">Então Registre-se</a></p>
   </form>
 </div>
 

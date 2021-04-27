@@ -1,6 +1,6 @@
 <?php 
 
-include '/wamp64/www/GestorVendas/app/scripts/conexao/conexao.php';
+include '../../../scripts/conexao/conexao.php';
 
 $id = $_GET['id'];
 
