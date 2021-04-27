@@ -14,8 +14,8 @@ include_once("../../base/header.php");
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Descricao</th>
             <th>Telefone</th>
+            <th>Descricao</th>
             <th>Editar</th>
             <th>Deletar</th>
         </tr>

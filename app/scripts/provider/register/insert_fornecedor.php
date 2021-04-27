@@ -2,6 +2,7 @@
 
 include '../../../scripts/conexao/conexao.php';
 
+$id = $_POST['id'];
 $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
@@ -14,21 +15,33 @@ $cep = $_POST['cep'];
 $cidade = $_POST['cidade'];
 $estado = $_POST['estado'];
 
-$query_fornecedor = "INSERT INTO fornecedor(nome, telefone, email, descricao) VALUES ('$nome','$telefone','$email','$descricao')";
-mysqli_query($conexao, $query_fornecedor);
 
-if ($query_fornecedor == true) {
-	$last_id = mysqli_insert_id($conexao);
 
-	$query = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, fornecedorID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
-	mysqli_query($conexao, $query);
-} else {
-	echo "SQL ERROR " . mysqli_error($conexao);
-}
-
-$query_updateFornecedor = "UPDATE fornecedor SET nome='$nome', descricao='$description', foto='', FornecedorID='$providerId' WHERE id = $id";
+if (!empty($id)) {
+	$query_updateFornecedor = "UPDATE fornecedor SET nome='$nome', descricao='$descricao' WHERE id = $id";
     mysqli_query($conexao, $query_updateFornecedor);
 
-header('location:/gestorvendas/app/pages/provider/register/register-provider.php');
+    $query_updateEndereco = "UPDATE endereco SET rua='$rua', numero='$numero' WHERE FornecedorID = $id";
+    mysqli_query($conexao, $query_updateEndereco);
+
+    //echo($query_updateFornecedor);
+}
+
+else{
+
+	$query_fornecedor = "INSERT INTO fornecedor(nome, telefone, email, descricao) VALUES ('$nome','$telefone','$email','$descricao')";
+	mysqli_query($conexao, $query_fornecedor);
+
+	if ($query_fornecedor == true) {
+		$last_id = mysqli_insert_id($conexao);
+
+		$query = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, fornecedorID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
+		mysqli_query($conexao, $query);
+	} else {
+		echo "SQL ERROR " . mysqli_error($conexao);
+	}
+}
+
+header('location:/gestorvendas/app/pages/provider/list/list-provider.php');
 
 ?>
