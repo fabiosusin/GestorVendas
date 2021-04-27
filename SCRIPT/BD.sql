@@ -86,6 +86,7 @@ CREATE TABLE Usuarios (
 	nome VARCHAR(255) NOT NULL,
     login VARCHAR(255) NOT NULL,
 	senha VARCHAR(100) NOT NULL,
+	clienteID int NOT NULL,
 	perfilID int NOT NULL,
 	FOREIGN KEY (PerfilID) REFERENCES Perfil(id),
 	PRIMARY KEY (id)

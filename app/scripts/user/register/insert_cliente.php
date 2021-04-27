@@ -6,6 +6,7 @@ $id = $_POST['id'];
 $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
+$senha = $_POST['senha'];
 $cartao = $_POST['cartao'];
 $rua = $_POST['rua'];
 $numero = $_POST['numero'];
@@ -17,13 +18,25 @@ $estado = $_POST['estado'];
 
 if (!empty($id)) {
 	
-	$query_updateCliente = "UPDATE CLIENTE SET nome='$nome', cartaoCredito='$cartao' WHERE id = $id";
+	$query_updateCliente = "UPDATE CLIENTE SET 
+		nome='$nome', 
+		telefone='$telefone',
+		email='$email',
+		/*senha='$senha',*/
+		cartaoCredito='$cartao'
+		WHERE id = $id";
     mysqli_query($conexao, $query_updateCliente);
 
-    $query_updateEndereco = "UPDATE ENDERECO SET rua='$rua', numero='$numero' WHERE ClienteID = $id";
+    $query_updateEndereco = "UPDATE ENDERECO SET 
+    	rua='$rua', 
+    	numero='$numero',
+    	complemento='$complemento',  
+    	bairro='$bairro',
+    	cep='$cep',
+    	cidade='$cidade',
+    	estado='$estado'
+    	WHERE ClienteID = $id";
     mysqli_query($conexao, $query_updateEndereco);
-
-    //echo($query_updateCliente);
 }
 
 else{
@@ -34,8 +47,11 @@ else{
 	if ($query_cliente == true) {
 		$last_id = mysqli_insert_id($conexao);
 
-		$query = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
-		mysqli_query($conexao, $query);
+		$query_usuarios = "INSERT INTO USUARIOS(nome, login, senha, perfilID, clienteID) VALUES('$nome','$email', '$senha',2,$last_id)";
+		mysqli_query($conexao, $query_usuarios);
+
+		$query_endereco = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
+		mysqli_query($conexao, $query_endereco);
 	} else {
 		echo "SQL ERROR " . mysqli_error($conexao);
 	}

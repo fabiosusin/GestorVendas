@@ -18,13 +18,24 @@ $estado = $_POST['estado'];
 
 
 if (!empty($id)) {
-	$query_updateFornecedor = "UPDATE fornecedor SET nome='$nome', descricao='$descricao' WHERE id = $id";
+	$query_updateFornecedor = "UPDATE fornecedor SET 
+		nome='$nome', 
+		telefone='$telefone',
+		email='$email',
+		descricao='$descricao' 
+		WHERE id = $id";
     mysqli_query($conexao, $query_updateFornecedor);
 
-    $query_updateEndereco = "UPDATE endereco SET rua='$rua', numero='$numero' WHERE FornecedorID = $id";
-    mysqli_query($conexao, $query_updateEndereco);
-
-    //echo($query_updateFornecedor);
+    $query_updateEndereco = "UPDATE endereco SET 
+    	rua='$rua', 
+    	numero='$numero',
+    	complemento='$complemento',  
+    	bairro='$bairro',
+    	cep='$cep',
+    	cidade='$cidade',
+    	estado='$estado'
+	    WHERE FornecedorID = $id";
+    mysqli_query($conexao, $query_updateEndereco);  
 }
 
 else{
