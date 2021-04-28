@@ -1,3 +1,7 @@
+.login-page .form {
+    height: 300px;
+}
+
 .login-page .form .text {
     margin-top: 10px;
     margin-bottom: 0;

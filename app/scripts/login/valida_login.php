@@ -17,5 +17,5 @@ if(mysqli_num_rows($consulta) == 1){
 	header('location:../../pages/home/site.php');
 }
 else{
-	header('location:login.php');
+	header('location:/gestorvendas/app/pages/login/login.php');
 }

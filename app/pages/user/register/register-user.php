@@ -16,7 +16,7 @@ if ((isset($_SESSION['login']) == true) and (isset($_SESSION['senha']) == true))
 include_once("../../base/header.php");
 ?>
 
-<div class="register-user" name="registerUser">
+<div class="page-container" name="registerUser">
   <div class="tab">
     <button type="button" class="tablinks" name="personal-data">Dados Pessoais</button>
     <button type="button" class="tablinks" name="address">Endereço</button>
@@ -33,7 +33,7 @@ include_once("../../base/header.php");
         <input class="default-input" type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email ?>">
       </div>
       <div class="col-md-12 input-with-icon">
-        <i class="fas fa-envelope icon"></i>
+        <i class="fas fa-lock icon"></i>
         <input class="default-input" type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="<?php echo $senha ?>">
       </div>
       <div class="col-md-12 input-with-icon">

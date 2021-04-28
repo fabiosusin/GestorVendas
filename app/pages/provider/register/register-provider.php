@@ -16,7 +16,7 @@ if ((isset($_SESSION['login']) == true) and (isset($_SESSION['senha']) == true))
 include_once("../../base/header.php");
 ?>
 
-<div class="register-provider" name="registerProvider">
+<div class="page-container" name="registerProvider">
   <div class="tab">
     <button type="button" class="tablinks" name="personal-data">Dados Pessoais</button>
     <button type="button" class="tablinks" name="address">Endereço</button>

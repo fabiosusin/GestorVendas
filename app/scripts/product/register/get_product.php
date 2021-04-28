@@ -6,6 +6,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 $name = '';
 $description = '';
 $provider = '';
+
+$query = "SELECT * FROM fornecedor";
+$consulta_providers = mysqli_query($conexao, $query);
+
 if (isset($id)) {
     $query = "SELECT * FROM `produto` WHERE id = '$id'";
     $find = mysqli_query($conexao, $query);

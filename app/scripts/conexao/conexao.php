@@ -3,7 +3,7 @@
 #Conexão com o banco de dados MYSQL *******************************
 $servidor = "localhost";
 $usuario = "root";
-$senha = "Losingtouch2018";
+$bdSenha = "Losingtouch2018";
 $database = "gestorvendas";
 
-$conexao = mysqli_connect($servidor, $usuario, $senha, $database);
+$conexao = mysqli_connect($servidor, $usuario, $bdSenha, $database);

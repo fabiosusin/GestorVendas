@@ -6,6 +6,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 $nome = '';
 $telefone = '';
 $email = '';
+$senha = '';
 $cartao = '';
 $rua = '';
 $numero = '';

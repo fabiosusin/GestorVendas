@@ -14,7 +14,7 @@ include_once("../../base/header.php");
     <thead>
         <tr>
             <th>Nome</th>
-            <th>Fornecedor</th>
+            <th>Código Fornecedor</th>
             <th>Descricao</th>
             <th>Editar</th>
             <th>Deletar</th>
