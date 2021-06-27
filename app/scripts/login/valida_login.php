@@ -5,7 +5,8 @@ include '../../scripts/conexao/conexao.php';
 $usuario = addslashes($_POST['usuario']);
 $senha = addslashes($_POST['senha']);
 
-$query = "SELECT * FROM USUARIOS WHERE LOGIN = '$usuario' and SENHA = '$senha'";
+$query = "SELECT * FROM USUARIOS WHERE login = '$usuario' and senha = '$senha' limit 1";
+echo $query;
 $consulta = mysqli_query($conexao, $query);
 
 if(mysqli_num_rows($consulta) == 1){
@@ -16,6 +17,5 @@ if(mysqli_num_rows($consulta) == 1){
 
 	header('location:../../pages/home/site.php');
 }
-else{
+else
 	header('location:/gestorvendas/app/pages/login/login.php');
-}

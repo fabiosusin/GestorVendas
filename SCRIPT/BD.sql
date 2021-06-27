@@ -36,7 +36,7 @@ CREATE TABLE Produto (
     id int NOT NULL AUTO_INCREMENT,
     nome varchar(255) NOT NULL,
 	descricao varchar(255) NOT NULL,
-    foto blob,
+    fotoUrl varchar(255),
 	FornecedorID int NOT NULL,
 	FOREIGN KEY (FornecedorID) REFERENCES Fornecedor(id),
     PRIMARY KEY (id)

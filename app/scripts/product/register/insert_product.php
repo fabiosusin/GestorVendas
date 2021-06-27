@@ -5,17 +5,21 @@ include '../../../scripts/conexao/conexao.php';
 $id = $_POST['id'];
 $name = $_POST['name'];
 $description = $_POST['description'];
-$provider = $_POST['provider'];
-
-$query_provider = "SELECT * FROM `fornecedor` WHERE nome = '$provider' limit 1";
-$result = mysqli_query($conexao, $query_provider);
-$providerId = ($result->fetch_assoc())["id"];
+$providerId = $_POST['providerId'];
+$tempName = $_FILES['picture']["tmp_name"];
+$realName = $_FILES['picture']["name"];
+$pathName = '';
+if ($realName != '') {
+    $realName = str_replace(" ", "_", $realName);
+    $pathName = "shared/upload/$realName";
+    copy($tempName, $pathName);
+}
 
 if (!empty($id)) {
-    $query_product = "UPDATE produto SET nome='$name', descricao='$description', foto='', FornecedorID='$providerId' WHERE id = $id";
+    $query_product = "UPDATE produto SET nome='$name', descricao='$description', fotoUrl='$pathName', FornecedorID='$providerId' WHERE id = $id";
     mysqli_query($conexao, $query_product);
 } else {
-    $query_product = "INSERT INTO produto(nome, descricao, foto, FornecedorID) VALUES ('$name','$description','','$providerId')";
+    $query_product = "INSERT INTO produto(nome, descricao, fotoUrl, FornecedorID) VALUES ('$name','$description','$pathName','$providerId')";
     mysqli_query($conexao, $query_product);
 }
 

@@ -1,22 +1,22 @@
+body,
+input,
+textarea,
+button {
+    font: 0.8rem Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
 * {
     margin: 0;
     padding: 0;
     border: none;
     text-decoration: none;
+    font-size: 14px;
 }
-
-body,
-input,
-textarea,
-button {
-    font: 0.8rem Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
 
 /* #region body */
 
 header {
-    width: 100vw;
+    width: 100%;
     height: 60px;
     background: var(--background-color-brighter);
     position: absolute;
@@ -31,20 +31,23 @@ header {
 }
 
 header .buttons {
-    width: 320px;
+    width: 70px;
     display: flex;
     justify-content: space-between;
+    font-size: 20px;
 }
 
 header .logo,
 header .buttons a {
     text-decoration: none;
-    color: #fff;
+    color: var(--main-color);
 }
-
+header .buttons a i {
+    font-size: 20px;
+}
 body {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,53 +118,82 @@ body {
     font-weight: bold;
 }
 
-.form .textarea-with-icon,
-.form .input-with-icon {
+.textarea-with-icon,
+.input-with-icon {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    font-size: 14px;
 }
 
-.form .textarea-with-icon .icon,
-.form .input-with-icon .icon {
+.textarea-with-icon .icon,
+.input-with-icon .icon {
     position: absolute;
     width: 20px;
     top: 40%;
     left: 30px;
     color: var(--background-color-brighter);
+    font-size: 14px;
 }
 
-.form .textarea-with-icon .icon {
+.textarea-with-icon .icon {
     top: 12%;
 }
 
-.form .textarea-with-icon .default-textarea,
-.form .input-with-icon .default-input {
+.default-textarea,
+.default-input {
     height: 40px;
     padding: 5px;
     padding-left: 40px;
     border-radius: 5px;
     background: var(--background-color);
+    font-size: 14px;
 }
 
-.form .textarea-with-icon .default-textarea {
+.default-textarea {
     padding-top: 10px;
     height: 130px;
     min-height: 130px;
     max-height: 130px;
     resize: none;
+    font-size: 14px;
 }
 
-.form .default-button {
+.default-button {
     height: 40px;
     background: var(--main-color);
     border-radius: 5px;
 }
 
+.search {
+    width: 600px;
+}
+
+.search .default-input {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    color: var(--main-color);
+    font-weight: bold;
+    padding: 0 70px;
+}
+
+.search.input-with-icon .icon {
+    left: auto;
+    top: 35%;
+    right: 30px;
+    color: var(--main-color);
+}
 
 /* #end-region */
+
+@media (max-width: 1000px) {
+    .search {
+        width: 60%;
+    }
+}
 
 @media (max-width: 700px) {
     .form {
@@ -169,20 +201,20 @@ body {
     }
 }
 
-@media (max-width: 450px) {
-    header .buttons {
-        width: 100%;
+@media (max-width: 600px) {
+    .search .default-input {
+        padding: 0 40px;
     }
-    header .logo {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .search.input-with-icon .icon {
+        right: 15px;
     }
 }
 
 @media (max-width: 400px) {
-    header .buttons span {
-        display: none;
+    .search .default-input {
+        padding-left: 0;
+    }
+    header {
+        padding: 0 10px;
     }
 }

@@ -1,18 +1,23 @@
 <?php
 $page_title = 'Cadastro de Produto';
 $page_css_links = ['product/register/register-product.css'];
+$page_scripts_links = ['product/register/register-product.js'];
 
 include_once("../../base/header.php");
 include '../../../scripts/product/register/get_product.php';
 
 ?>
 
-<div class="page-container">
-  <form class="form" method="post" action="../../../scripts/product/register/insert_product.php">
+<div class="page-container" name="registerProduct">
+  <form class="form" method="post" action="../../../scripts/product/register/insert_product.php" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $id ?>" />
     <div class="photo">
-      <button type="button" class="content">
-        <i class="fas fa-camera"></i>
+      <button type="button" class="content" name="btn-photo">
+        <div class="image" name="image-product">
+          <a class="remove-picture" name="remove-picture"><i class="fas fa-times"></i></a>
+        </div>
+        <i class="fas fa-camera" name="icon"></i>
+        <input type="file" id="picture" name="picture" accept="image/png, image/jpeg" />
       </button>
     </div>
     <div class="col-md-12 input-with-icon">
@@ -21,7 +26,7 @@ include '../../../scripts/product/register/get_product.php';
     </div>
     <div class="col-md-12 input-with-icon">
       <i class="fas fa-lock icon"></i>
-      <select class="default-input" name="provider" value="<?php echo $provider ?>">
+      <select class="default-input" name="providerId" value="<?php echo $provider ?>">
         <option>Selecione um fornecedor</option>
         <?php
         while ($linha = mysqli_fetch_array($consulta_providers)) {
