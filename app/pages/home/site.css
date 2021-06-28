@@ -65,7 +65,7 @@ main {
 .page .products .item {
     height: 300px;
     overflow: hidden;
-    width: 23.7%;
+    width: 23.6%;
     margin-left: 18px;
     margin-bottom: 20px;
     background: var(--main-color);
