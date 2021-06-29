@@ -13,20 +13,21 @@ include_once("../../base/header.php");
 <table class="table table-hover table-striped" id="provider">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Nome</th>
-            <th>Telefone</th>
             <th>Descricao</th>
-            <th>Editar</th>
+            <th>Fornecedor</th>
             <th>Deletar</th>
         </tr>
     </thead>
     <tbody>
 
         <?php
-        while ($linha = mysqli_fetch_array($find_providers)) {
-            echo '<tr><td >' . $linha['nome'] . '</td>';
-            echo '<td>' . $linha['telefone'] . '</td>';
+        while ($linha = mysqli_fetch_array($find_products)) {
+            echo '<tr><td >' . $linha['id'] . '</td>';
+            echo '<td>' . $linha['nome'] . '</td>';
             echo '<td>' . $linha['descricao'] . '</td>';
+            echo '<td>' . $linha['fornecedor_nome'] . '</td>';
         ?>
             <td>
                 <a href="../register/register-provider.php?id=<?php echo $linha['id']; ?>">

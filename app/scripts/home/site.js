@@ -19,7 +19,7 @@
     };
     main.onClickAddToCart = function() {
         const id = $(this).parent().find('[name=productId]').val()
-        let ids = localStorage.getItem('productsId');
+        let ids = JSON.parse(localStorage.getItem('productsId'));
         if (!ids)
             ids = [];
         if (!id || ids.includes(id))

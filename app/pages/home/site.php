@@ -7,9 +7,9 @@ include_once("../base/header.php");
 include_once("../../scripts/conexao/conexao.php");
 
 $name = isset($_GET['name']) ? $_GET['name'] : '';
-$where = '';
+$where = 'where estoque.ProdutoID IS NOT NULL';
 if (isset($name))
-  $where = "where produto.nome like '%$name%'";
+  $where .= " and produto.nome like '%$name%'";
 
 $query = "SELECT * FROM produto LEFT JOIN estoque ON produto.id = estoque.ProdutoID $where";
 $consulta_products = mysqli_query($conexao, $query);
@@ -74,10 +74,10 @@ $consulta_products = mysqli_query($conexao, $query);
         ' . $image . '
         </div>
         <div class="description">
-          <span><strong>' . $linha['nome'] . '</strong> por <strong>R$ ' . $linha['preco'] . '</strong></span>
+          <span><strong>' . $linha['nome'] . '</strong> por <strong>R$ ' .  number_format($linha['preco'], 2, ',', '.') . '</strong></span>
         </div>
         <div class="buy">
-          <input type="hidden" name="productId" value="'. $linha['ProdutoID'] .'" />
+          <input type="hidden" name="productId" value="' . $linha['ProdutoID'] . '" />
           <button class="default-button" type="button" name="add-to-cart">Adicionar ao Carrinho <i class="fas fa-shopping-bag"></i> </button>
         </div>
       </div>';

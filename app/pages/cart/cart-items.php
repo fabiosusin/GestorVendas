@@ -1,7 +1,7 @@
 <?php
 include_once("../../../app/scripts/conexao/conexao.php");
 
-$ids = $_POST['ids'];
+$ids = isset($_POST['ids']) ? $_POST['ids'] : null;
 $ids = isset($ids) && is_array($ids) ? implode(",", $ids) : null;
 
 if (isset($ids)) {
@@ -16,7 +16,8 @@ if (isset($ids)) {
 if (isset($consulta_products))
   while ($linha = mysqli_fetch_array($consulta_products)) {
     $image = $linha['fotoUrl'] ? '<img src="../../' . $linha['fotoUrl'] . '" alt="Imagem">' : '';
-    echo '<div class="product">
+    echo '<div class="product" name="product">
+            <input type="hidden" name="productId" value="' . $linha['ProdutoID'] . '"/>
             <div class="item">
               <div class="photo">
               ' . $image . '
@@ -24,13 +25,13 @@ if (isset($consulta_products))
               <span>' . $linha['nome'] . '</span>
             </div>
             <div class="item">
-              <span>R$ ' . $linha['preco'] . '</span>
+              <span name="price">R$ ' .  number_format($linha['preco'], 2, ',', '.') . '</span>
               <div class="quantity">
-                <input class="default-input" value="1" type="tel" name="quantity" />
+                <input mask="number" class="default-input" value="1" type="tel" name="quantity" />
               </div>
             </div>
             <div class="item">
-              <span>R$ ' . $linha['preco'] . '</span>
+              <span name="total-price">R$ ' . number_format($linha['preco'], 2, ',', '.') . '</span>
               <a class="remove-product" name="remove-product"><i class="fas fa-trash"></i></a>
             </div>
           </div>';

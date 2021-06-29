@@ -14,18 +14,7 @@ include_once("../base/header.php");
       <a class="link" onclick="window.history.go(-1); return false;"><i class="far fa-arrow-alt-circle-left"></i>Voltar para a Loja</a>
       <a class="link" name="clear-cart"><i class="fas fa-trash remove"></i>Limpar o Carrinho</a>
     </div>
-    <div class="footer">
-      <div class="infos">
-        <div class="sub-total">
-          <span class="left">SubTotal</span>
-          <span class="right">R$ 20,00</span>
-        </div>
-        <div class="sub-total">
-          <span class="left">Total</span>
-          <span class="right">R$ 20,00</span>
-        </div>
-        <button class="col-md-12 default-button">Finalizar Compra</button>
-      </div>
+    <div class="footer" name="total-price-infos">
     </div>
   </div>
 </main>

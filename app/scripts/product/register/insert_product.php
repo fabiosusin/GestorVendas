@@ -23,4 +23,5 @@ if (!empty($id)) {
     mysqli_query($conexao, $query_product);
 }
 
+
 header('location:../../../pages/product/list/list-product.php');

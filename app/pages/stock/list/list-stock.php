@@ -8,12 +8,13 @@ include_once("../../base/header.php");
 
 ?>
 
-<a class="btn btn-success" href="../register/register-user.php">Inserir nova movimentação</a>
+<a class="btn btn-success" href="../register/register-stock.php">Inserir nova movimentação</a>
 
 <table class="table table-hover table-striped" id="provider">
     <thead>
         <tr>
-            <th>Código Produto</th>
+            <th>Nome do produto</th>
+            <th>Fornecedor</th>
             <th>Quantidade</th>
             <th>Preço</th>
             <th>Editar</th>
@@ -24,9 +25,10 @@ include_once("../../base/header.php");
 
         <?php
         while ($linha = mysqli_fetch_array($find_user)) {
-            echo '<tr><td >' . $linha['ProdutoID'] . '</td>';
+            echo '<tr><td >' . $linha['nome'] . '</td>';
+            echo '<td>' . $linha['fornecedor_nome'] . '</td>';
             echo '<td>' . $linha['quantidade'] . '</td>';
-            echo '<td>' . $linha['preco'] . '</td>';
+            echo '<td>' . "R$ " . $linha['preco'] . ",00" . '</td>';
         ?>
             <td>
                 <a href="../register/register-stock.php?id=<?php echo $linha['id']; ?>">
