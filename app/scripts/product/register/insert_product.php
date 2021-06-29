@@ -18,9 +18,14 @@ if ($realName != '') {
 if (!empty($id)) {
     $query_product = "UPDATE produto SET nome='$name', descricao='$description', fotoUrl='$pathName', FornecedorID='$providerId' WHERE id = $id";
     mysqli_query($conexao, $query_product);
+
+    echo($query_product);
+    
 } else {
     $query_product = "INSERT INTO produto(nome, descricao, fotoUrl, FornecedorID) VALUES ('$name','$description','$pathName','$providerId')";
     mysqli_query($conexao, $query_product);
 }
 
-header('location:../../../pages/product/list/list-product.php');
+
+
+//header('location:../../../pages/product/list/list-product.php');

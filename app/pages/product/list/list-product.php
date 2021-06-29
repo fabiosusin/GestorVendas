@@ -13,9 +13,10 @@ include_once("../../base/header.php");
 <table class="table table-hover table-striped" id="products">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Nome</th>
-            <th>Código Fornecedor</th>
             <th>Descricao</th>
+            <th>Fornecedor</th>
             <th>Editar</th>
             <th>Deletar</th>
         </tr>
@@ -24,9 +25,10 @@ include_once("../../base/header.php");
 
         <?php
         while ($linha = mysqli_fetch_array($find_products)) {
-            echo '<tr><td >' . $linha['nome'] . '</td>';
-            echo '<td>' . $linha['FornecedorID'] . '</td>';
+            echo '<tr><td >' . $linha['id'] . '</td>';
+            echo '<td>' . $linha['nome'] . '</td>';
             echo '<td>' . $linha['descricao'] . '</td>';
+            echo '<td>' . $linha['fornecedor_nome'] . '</td>';
         ?>
             <td>
                 <a href="../register/register-product.php?id=<?php echo $linha['id']; ?>">

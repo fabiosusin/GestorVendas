@@ -8,18 +8,23 @@ $type = $_POST['type'];
 $quantity = $_POST['quantity'];
 $price = $_POST['price'];
 
-$query_product = "SELECT * FROM `produto` WHERE nome = '$product' limit 1";
-$result = mysqli_query($conexao, $query_product);
-$productId = ($result->fetch_assoc())["id"];
+// $query_product = "SELECT * FROM `produto` WHERE nome = '$product' limit 1";
+// $result = mysqli_query($conexao, $query_product);
+// $productId = ($result->fetch_assoc())["id"];
 
 $quantity *= $type == 'Entrada' ? 1 : -1;
 
 if (!empty($id)) {
-    $query_stock = "UPDATE estoque SET quantidade='$quantity', preco='$price', ProdutoID='$productId' WHERE id = $id";
+    $query_stock = "UPDATE estoque SET quantidade='$quantity', preco='$price', ProdutoID='$product'";
     mysqli_query($conexao, $query_stock);
+
+    echo($query_stock);
+
 } else {
-    $query_stock = "INSERT INTO estoque(quantidade, preco, ProdutoID) VALUES ('$quantity','$price','$productId')";
+    $query_stock = "INSERT INTO estoque(quantidade, preco, ProdutoID) VALUES ('$quantity','$price','$product')";
     mysqli_query($conexao, $query_stock);
+
+    echo($query_stock);
 }
 
 header('location:../../../pages/stock/list/list-stock.php');
