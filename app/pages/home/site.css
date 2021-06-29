@@ -1,0 +1,158 @@
+/* #region Main */
+
+main {
+    width: 100%;
+    height: 100vh;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.page {
+    width: 1330px;
+    height: 100%;
+}
+
+.page .images,
+.page .images .carousel,
+.page .images .carousel .item {
+    height: 400px;
+    overflow: hidden;
+    border: 1px solid var(--main-color);
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.page .images .carousel .item img {
+    height: 100%;
+    background-size: cover;
+    object-fit: cover;
+}
+
+.page .images .carousel .carousel-indicators li {
+    border-color: var(--main-color);
+}
+
+.page .images .carousel .carousel-control {
+    background: none;
+    color: var(--main-color);
+}
+
+.page .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background: var(--main-color);
+    height: 70px;
+    border-radius: 5px;
+}
+
+.page .title p {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+}
+
+.page .products {
+    overflow: hidden;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -18px;
+    width: calc(100% + 18px);
+}
+
+.page .products .item {
+    height: 300px;
+    overflow: hidden;
+    width: 23.6%;
+    margin-left: 18px;
+    margin-bottom: 20px;
+    background: var(--main-color);
+    border-radius: 5px;
+}
+
+.page .products .item .photo {
+    height: 250px;
+    overflow: hidden;
+}
+
+.page .products .item .photo img:hover {
+    transform: scale(1.3);
+}
+
+.page .products .item .photo img {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    object-fit: cover;
+    transition: 0.7s;
+}
+
+.page .products .item .description {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    color: #fff;
+}
+
+.page .products .item:hover .description {
+    display: none;
+}
+
+.page .products .item .buy {
+    display: none;
+}
+
+.page .products .item .buy button {
+    width: 220px;
+    color: #fff;
+    border: 2px solid;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+}
+
+.page .products .item .buy button i {
+    font-size: 20px;
+}
+
+.page .products .item:hover .buy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+
+
+/* #end-region */
+
+@media (max-width: 1400px) {
+    .page .products .item {
+        width: 31.8%;
+    }
+}
+
+@media (max-width: 1300px) {
+    .page .products .item {
+        width: 48%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .page .products .item {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .page .title {
+        height: 100px;
+    }
+}
