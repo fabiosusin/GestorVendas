@@ -1,5 +1,4 @@
 <?php
-
 $page_title = 'Carrinho de Compras';
 $page_css_links = ['/cart/cart.css'];
 $page_scripts_links = ['/cart/cart.js'];
