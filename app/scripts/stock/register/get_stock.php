@@ -8,8 +8,14 @@ $type = 'Entrada';
 $quantity = '';
 $price = '';
 
-$query = "SELECT * FROM produto";
-$consulta_products = mysqli_query($conexao, $query);
+
+$query = "SELECT 
+          produto.id, produto.nome as produto_nome
+          FROM 
+          produto 
+          WHERE produto.id
+          not in ( select estoque.ProdutoID FROM estoque)";
+$consulta_products_estoque = mysqli_query($conexao, $query);
 
 if (!empty($id)) {
     $query = "SELECT * FROM estoque WHERE id = $id";
