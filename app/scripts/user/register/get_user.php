@@ -1,44 +1,25 @@
 <?php
 
 include '../../../scripts/conexao/conexao.php';
+include_once('./app/models/user.php');
+include_once('./app/DAO/userDAO.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
-$nome = '';
-$telefone = '';
-$email = '';
-$senha = '';
-$cartao = '';
-$rua = '';
-$numero = '';
-$complemento = '';
-$bairro = '';
-$cep = '';
-$cidade = '';
-$estado = '';
 
-if (!empty($id)) {
-    $query = "SELECT * FROM cliente WHERE id = $id";
-    $find = mysqli_query($conexao, $query);
-        while ($line = mysqli_fetch_array($find)) {
-            $nome = $line['nome'];
-            $cartao = $line['cartaoCredito'];
-            $telefone = $line['telefone'];
-            $email = $line['email'];        
+$userDao = new UserDAO();
+$user = $userDao->getById($id);
 
-        if (isset($id)) {
-            $query_endereco = "SELECT * FROM endereco WHERE ClienteID = '$id' limit 1";
-            $findEndereco = mysqli_query($conexao, $query_endereco);
-            
-            while ($endereco = mysqli_fetch_array($findEndereco)) {
-                
-                $rua = $endereco["rua"];
-                $numero = $endereco['numero'];
-                $complemento = $endereco['complemento'];
-                $bairro = $endereco['bairro'];
-                $cep = $endereco['cep'];
-                $cidade = $endereco['cidade'];
-                $estado = $endereco['estado'];
-            }
-        }
-    }
-}
+if(!isset($user))
+    return;
+
+$nome = $user->getNome();
+$telefone = $user->getTelefone();
+$email = $user->getEmail();
+$cartao = $user->getCartao();
+$rua = $user->getRua();
+$numero = $user->getNumero();
+$complemento = $user->getComplemento();
+$bairro = $user->getBairro();
+$cep = $user->getCep();
+$cidade = $user->getCidade();
+$estado = $user->getEstado();

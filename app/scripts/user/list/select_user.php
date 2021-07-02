@@ -1,6 +1,7 @@
 <?php 
 
-include '../../../scripts/conexao/conexao.php';
+include '../../../models/user.php';
+include '../../../DAO/userDAO.php';
+$userDao = new UserDAO();
 
-$query = "SELECT * FROM CLIENTE";
-$find_user = mysqli_query($conexao, $query);
+$users = $userDao->getAllUsers();

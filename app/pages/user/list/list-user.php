@@ -23,20 +23,20 @@ include_once("../../base/header.php");
     <tbody>
 
         <?php
-        while ($linha = mysqli_fetch_array($find_user)) {
-            echo '<tr><td >' . $linha['nome'] . '</td>';
-            echo '<td>' . $linha['telefone'] . '</td>';
-            echo '<td>' . $linha['cartaoCredito'] . '</td>';
+        foreach($users as $user) {
+            echo '<tr><td >' . $user->getNome() . '</td>';
+            echo '<td>' . $user->getTelefone() . '</td>';
+            echo '<td>' . $user->getCartao() . '</td>';
         ?>
             <td>
-                <a href="../register/register-user.php?id=<?php echo $linha['id']; ?>">
+                <a href="../register/register-user.php?id=<?php echo $user->getId(); ?>">
                     <span style="color: green;">
                         <i class="fas fa-pencil-alt"></i>
                     </span>
                 </a>
             </td>
             <td>
-                <a href="../../../scripts/user/delete/delete_user.php?id=<?php echo $linha['id']; ?>">
+                <a href="../../../scripts/user/delete/delete_user.php?id=<?php echo $user->getId(); ?>">
                     <span style="color: Tomato;">
                         <i class="fas fa-trash-alt"></i>
                     </span>

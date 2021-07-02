@@ -136,6 +136,23 @@ h1 {
     font-weight: bold;
 }
 
+.footer .message {
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .message .success {
+    font-size: 20px;
+    color: var(--main-color);
+}
+
+.footer .message .error {
+    font-size: 20px;
+    color: var(--danger);
+}
+
 .footer .infos {
     height: 170px;
     width: 250px;
