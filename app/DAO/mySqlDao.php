@@ -5,8 +5,21 @@ class MySqlDAO
     #Conexão com o banco de dados MYSQL *******************************
     private $servidor = "localhost";
     private $usuario = "root";
-    private $bdSenha = "";
+    private $bdSenha = "123gio123";
     private $database = "gestorvendas";
+    public $conn;
 
-    public $conn = mysqli_connect($servidor, $usuario, $bdSenha, $database);
+    // get the database connection
+    public function getConnection()
+    {
+
+        $this->conn = null;
+
+        try {
+            $this->conn = new PDO('mysql:host=localhost;dbname=gestorvendas',  $this->usuario,  $this->bdSenha);
+        } catch (PDOException $exception) {
+            echo "Connection error: " . $exception->getMessage();
+        }
+        return $this->conn;
+    }
 }

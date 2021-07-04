@@ -3,8 +3,14 @@
 //include '../../models/user.php';
 include 'mySqlDao.php';
 
-class UserDAO// extends MySqlDao
+class UserDAO // extends MySqlDao
 {
+
+    public function __construct()
+    {
+        $dao = new MySqlDAO();
+        $this->conn = $dao->getConnection();
+    }
 
     public function insert($usuario)
     {
@@ -21,26 +27,46 @@ class UserDAO// extends MySqlDao
         $telefone = $usuario->getTelefone();
         $senha = $usuario->getSenha();
 
-        $query_cliente = "INSERT INTO cliente(nome, telefone, email, cartaoCredito) VALUES ('$nome','$telefone','$email','$cartao')";
-        mysqli_query($this->conn, $query_cliente);
+        $query_cliente = "INSERT INTO cliente(nome, telefone, email, cartaoCredito, senha) 
+        VALUES (:nome,:telefone,:email,:cartao, :senha)";
 
-        if ($query_cliente == true) {
-            $last_id = mysqli_insert_id($this->conn);
+        $stmt = $this->conn->prepare($query_cliente);
 
-            $query_usuarios = "INSERT INTO USUARIOS(nome, login, senha, perfilID, clienteID) VALUES('$nome','$email', '$senha',2,$last_id)";
-            mysqli_query($this->conn, $query_usuarios);
+        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(':senha', $senha);
+        $stmt->bindParam(":telefone", $telefone);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(':cartao', $cartao);
 
-            $query_endereco = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
-            mysqli_query($this->conn, $query_endereco);
-        } else {
-            echo "SQL ERROR " . mysqli_error($this->conn);
-        }
+        $stmt->execute();
+
+        $stmt = $this->conn->prepare("SELECT * FROM cliente WHERE nome = :nome, senha = :senha limit 1");
+        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(':senha', $senha);
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+            $last_id = $row['id'];
+
+        $query_endereco = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) 
+            VALUES(:rua, :numero, :complemento, :bairro, :cep, :cidade, :estado, :id)";
+
+        $stmt = $this->conn->prepare($query_endereco);
+
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":cidade", $cidade);
+        $stmt->bindParam(":cep", $cep);
+        $stmt->bindParam(':bairro', $bairro);
+        $stmt->bindParam(':complemento', $complemento);
+        $stmt->bindParam(':numero', $numero);
+        $stmt->bindParam(':rua', $rua);
+        $stmt->bindParam(':id', $last_id);
+
+        $stmt->execute();
     }
 
     public function update(&$usuario)
     {
 
-        $id = $usuario->getId();
         $nome = $usuario->getNome();
         $estado = $usuario->getEstado();
         $cidade = $usuario->getCidade();
@@ -53,26 +79,49 @@ class UserDAO// extends MySqlDao
         $email = $usuario->getEmail();
         $telefone = $usuario->getTelefone();
         $senha = $usuario->getSenha();
+        $id = $usuario->getId();
 
         $query_updateCliente = "UPDATE CLIENTE SET 
-		nome='$nome', 
-		telefone='$telefone',
-		email='$email',
-		/*senha='$senha',*/
-		cartaoCredito='$cartao'
-		WHERE id = $id";
-        mysqli_query($this->conn, $query_updateCliente);
+		nome=:nome, 
+		telefone=:telefone,
+		email=:email,
+		senha=:senha,
+		cartaoCredito=:cartao
+		WHERE id = :id";
+
+        $stmt = $this->conn->prepare($query_updateCliente);
+
+        $stmt->bindParam(":nome", $nome);
+        $stmt->bindParam(":telefone", $telefone);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(':senha', $senha);
+        $stmt->bindParam(':cartao', $cartao);
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
 
         $query_updateEndereco = "UPDATE ENDERECO SET 
-    	rua='$rua', 
-    	numero='$numero',
-    	complemento='$complemento',  
-    	bairro='$bairro',
-    	cep='$cep',
-    	cidade='$cidade',
-    	estado='$estado'
-    	WHERE ClienteID = $id";
-        mysqli_query($this->conn, $query_updateEndereco);
+    	rua=:rua, 
+    	numero=:numero,
+    	complemento=:complemento,  
+    	bairro=:bairro,
+    	cep=:cep,
+    	cidade=:cidade,
+    	estado=:estado
+    	WHERE ClienteID = :id";
+
+        $stmt = $this->conn->prepare($query_updateEndereco);
+
+        $stmt->bindParam(":estado", $estado);
+        $stmt->bindParam(":cidade", $cidade);
+        $stmt->bindParam(":cep", $cep);
+        $stmt->bindParam(':bairro', $bairro);
+        $stmt->bindParam(':complemento', $complemento);
+        $stmt->bindParam(':numero', $numero);
+        $stmt->bindParam(':rua', $rua);
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
     }
 
     public function getById($id)
@@ -81,51 +130,68 @@ class UserDAO// extends MySqlDao
             return null;
 
         $query = "SELECT * FROM cliente WHERE id = $id";
-        $find = mysqli_query($this->conn, $query);
-        while ($line = mysqli_fetch_array($find)) {
-            $nome = $line['nome'];
-            $cartao = $line['cartaoCredito'];
-            $telefone = $line['telefone'];
-            $email = $line['email'];
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
 
-            if (isset($id)) {
-                $query_endereco = "SELECT * FROM endereco WHERE ClienteID = '$id' limit 1";
-                $findEndereco = mysqli_query($this->conn, $query_endereco);
-
-                while ($endereco = mysqli_fetch_array($findEndereco)) {
-
-                    $rua = $endereco["rua"];
-                    $numero = $endereco['numero'];
-                    $complemento = $endereco['complemento'];
-                    $bairro = $endereco['bairro'];
-                    $cep = $endereco['cep'];
-                    $cidade = $endereco['cidade'];
-                    $estado = $endereco['estado'];
-                }
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nome = $row['nome'];
+        $cartao = $row['cartaoCredito'];
+        $telefone = $row['telefone'];
+        $email = $row['email'];
+        $senha = $row['senha'];
+        $rua = '';
+        $numero = '';
+        $complemento = '';
+        $bairro = '';
+        $cep = '';
+        $cidade = '';
+        $estado = '';
+        if (isset($id)) {
+            $query_endereco = "SELECT * FROM endereco WHERE ClienteID = '$id' limit 1";
+            $stmt = $this->conn->prepare($query_endereco);
+            $stmt->bindParam(1, $id);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $rua = $row["rua"];
+                $numero = $row['numero'];
+                $complemento = $row['complemento'];
+                $bairro = $row['bairro'];
+                $cep = $row['cep'];
+                $cidade = $row['cidade'];
+                $estado = $row['estado'];
             }
         }
 
-        return new User($id, '', $nome, $email, $telefone, $cartao, $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado);
+        return new User($id, $senha, $nome, $email, $telefone, $cartao, $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado);
     }
 
     public function deletebyId($id)
     {
 
-        $query = "DELETE FROM ENDERECO WHERE ClienteID = $id";
-        mysqli_query($this->conn, $query);
+        $query = "DELETE FROM ENDERECO WHERE ClienteID = :id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
 
         $query = "DELETE FROM CLIENTE WHERE id = $id";
-        mysqli_query($this->conn, $query);
+                
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
     }
 
     public function getAllUsers()
     {
-        $users = array();   
+        $users = array();
         $query = "SELECT * FROM CLIENTE";
-        $find_user = mysqli_query($this->conn, $query);
-        while ($row = mysqli_fetch_array($find_user)) {
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             //serio PHP q tu não aceita mais q um construtor???
-            $users[] = new User($row['id'], '',$row['nome'],'', $row['telefone'], $row['cartaoCredito'],'', '','','','','','');
+            $users[] = new User($row['id'], '', $row['nome'], '', $row['telefone'], $row['cartaoCredito'], '', '', '', '', '', '', '');
         }
 
         return $users;

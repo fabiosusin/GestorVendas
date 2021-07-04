@@ -1,8 +1,7 @@
 <?php
 
-include '../../../scripts/conexao/conexao.php';
-include_once('./app/models/user.php');
-include_once('./app/DAO/userDAO.php');
+include '../../../models/user.php';
+include '../../../DAO/userDAO.php';
 
 $id = $_POST['id'];
 $nome = $_POST['nome'];

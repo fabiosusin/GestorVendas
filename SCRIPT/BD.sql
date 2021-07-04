@@ -10,6 +10,7 @@ CREATE TABLE Fornecedor (
 CREATE TABLE Cliente (
     id int NOT NULL AUTO_INCREMENT,
     nome varchar(255) NOT NULL,
+	senha varchar(255) NOT NULL,
     telefone varchar(20),
 	email varchar(100),
 	cartaoCredito varchar(100),
@@ -79,15 +80,4 @@ CREATE TABLE Perfil (
     id int NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
-);
-
-CREATE TABLE Usuarios (
-    id int NOT NULL AUTO_INCREMENT,
-	nome VARCHAR(255) NOT NULL,
-    login VARCHAR(255) NOT NULL,
-	senha VARCHAR(100) NOT NULL,
-	clienteID int NOT NULL,
-	perfilID int NOT NULL,
-	FOREIGN KEY (PerfilID) REFERENCES Perfil(id),
-	PRIMARY KEY (id)
 );

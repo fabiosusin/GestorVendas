@@ -2,9 +2,9 @@ body,
 input,
 textarea,
 button {
-    font: 0.8rem Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font: 0.8rem Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +12,7 @@ button {
     text-decoration: none;
     font-size: 14px;
 }
+
 
 /* #region body */
 
@@ -42,9 +43,11 @@ header .buttons a {
     text-decoration: none;
     color: var(--main-color);
 }
+
 header .buttons a i {
     font-size: 20px;
 }
+
 body {
     height: 100vh;
     width: 100%;
@@ -200,6 +203,11 @@ main {
     width: 1330px;
     height: 100%;
 }
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: var(--background-color);
+}
+
 
 /* #end-region */
 
