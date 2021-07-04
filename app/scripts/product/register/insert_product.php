@@ -1,6 +1,10 @@
 <?php
 
-include '../../../scripts/conexao/conexao.php';
+include '../../../DAO/mySqlDao.php';
+include '../../../DAO/produtoDAO.php';
+include '../../../models/produto.php';
+
+$productDAO = new ProdutoDAO();
 
 $id = $_POST['id'];
 $name = $_POST['name'];
@@ -15,13 +19,11 @@ if ($realName != '') {
     copy($tempName, $pathName);
 }
 
-if (!empty($id)) {
-    $query_product = "UPDATE produto SET nome='$name', descricao='$description', fotoUrl='$pathName', FornecedorID='$providerId' WHERE id = $id";
-    mysqli_query($conexao, $query_product);
-} else {
-    $query_product = "INSERT INTO produto(nome, descricao, fotoUrl, FornecedorID) VALUES ('$name','$description','$pathName','$providerId')";
-    mysqli_query($conexao, $query_product);
-}
+$product = new Produto($id, $name, $description, $pathName, $providerId);
+if (!empty($id))
+    $productDAO->atualizar($product);
+else
+    $productDAO->inserir($product);
 
 
 header('location:../../../pages/product/list/list-product.php');

@@ -1,14 +1,17 @@
 <?php 
 
-include '../../../scripts/conexao/conexao.php';
+
+include '../../../DAO/mySqlDao.php';
+include '../../../models/fornecedor.php';
+include '../../../DAO/fornecedorDAO.php';
+include '../../../DAO/estoqueDAO.php';
+
+$providerDAO = new FornecedorDAO();
+$addressDAO = new EnderecoDAO();
 
 $id = $_GET['id'];
 
-
-$query = "DELETE FROM ENDERECO WHERE FornecedorID = $id";	
-mysqli_query($conexao, $query);
-
-$query = "DELETE FROM FORNECEDOR WHERE id = $id";	
-mysqli_query($conexao, $query);
+$providerDAO->deletar($id);
+$addressDAO->deletarFornecedorId($id);
 
 header('location:../../../pages/provider/list/list-provider.php');

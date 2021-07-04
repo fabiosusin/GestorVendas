@@ -1,6 +1,8 @@
 <?php 
 
-include '../../../scripts/conexao/conexao.php';
+include '../../../DAO/mySqlDao.php';
+include '../../../models/fornecedor.php';
+include '../../../DAO/fornecedorDAO.php';
 
-$query = "SELECT * FROM FORNECEDOR";
-$find_providers = mysqli_query($conexao, $query);
+$provider = new FornecedorDAO();
+$providers = $provider->listarTodos();

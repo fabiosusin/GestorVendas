@@ -75,9 +75,3 @@ CREATE TABLE ItemPedido (
 	FOREIGN KEY (ProdutoID) REFERENCES Produto(id),
 	PRIMARY KEY (id)
 );
-
-CREATE TABLE Perfil (
-    id int NOT NULL AUTO_INCREMENT,
-	nome VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id)
-);

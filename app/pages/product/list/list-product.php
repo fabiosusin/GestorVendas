@@ -23,20 +23,20 @@ include_once("../../base/header.php");
     <tbody>
 
         <?php
-        while ($linha = mysqli_fetch_array($find_products)) {
-            echo '<tr><td >' . $linha['nome'] . '</td>';
-            echo '<td>' . $linha['FornecedorID'] . '</td>';
-            echo '<td>' . $linha['descricao'] . '</td>';
+        foreach($products as $product) {
+            echo '<tr><td >' . $product->getNome() . '</td>';
+            echo '<td>' . $product->getFornecedorID() . '</td>';
+            echo '<td>' . $product->getDescricao() . '</td>';
         ?>
             <td>
-                <a href="../register/register-product.php?id=<?php echo $linha['id']; ?>">
+                <a href="../register/register-product.php?id=<?php echo $product->getId(); ?>">
                     <span style="color: green;">
                         <i class="fas fa-pencil-alt"></i>
                     </span>
                 </a>
             </td>
             <td>
-                <a href="../../../scripts/product/delete/delete_product.php?id=<?php echo $linha['id']; ?>">
+                <a href="../../../scripts/product/delete/delete_product.php?id=<?php echo $product->getId(); ?>">
                     <span style="color: Tomato;">
                         <i class="fas fa-trash-alt"></i>
                     </span>

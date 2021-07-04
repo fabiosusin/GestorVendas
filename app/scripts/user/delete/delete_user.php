@@ -1,5 +1,6 @@
 <?php 
 
+include '../../../DAO/mySqlDao.php';
 include '../../../models/user.php';
 include '../../../DAO/userDAO.php';
 

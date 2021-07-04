@@ -1,6 +1,14 @@
 <?php
 
-include '../../../scripts/conexao/conexao.php';
+
+include '../../../DAO/mySqlDao.php';
+include '../../../models/fornecedor.php';
+include '../../../models/endereco.php';
+include '../../../DAO/fornecedorDAO.php';
+include '../../../DAO/estoqueDAO.php';
+
+$providerDAO = new FornecedorDAO();
+$addressDAO = new EnderecoDAO();
 
 $id = $_POST['id'];
 $nome = $_POST['nome'];
@@ -16,43 +24,15 @@ $cidade = $_POST['cidade'];
 $estado = $_POST['estado'];
 
 
+$provider = new Fornecedor($id, $nome, $descricao, $telefone, $email);
+$address = new Endereco('', $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado, '', $id);
 
 if (!empty($id)) {
-	$query_updateFornecedor = "UPDATE fornecedor SET 
-		nome='$nome', 
-		telefone='$telefone',
-		email='$email',
-		descricao='$descricao' 
-		WHERE id = $id";
-    mysqli_query($conexao, $query_updateFornecedor);
-
-    $query_updateEndereco = "UPDATE endereco SET 
-    	rua='$rua', 
-    	numero='$numero',
-    	complemento='$complemento',  
-    	bairro='$bairro',
-    	cep='$cep',
-    	cidade='$cidade',
-    	estado='$estado'
-	    WHERE FornecedorID = $id";
-    mysqli_query($conexao, $query_updateEndereco);  
-}
-
-else{
-
-	$query_fornecedor = "INSERT INTO fornecedor(nome, telefone, email, descricao) VALUES ('$nome','$telefone','$email','$descricao')";
-	mysqli_query($conexao, $query_fornecedor);
-
-	if ($query_fornecedor == true) {
-		$last_id = mysqli_insert_id($conexao);
-
-		$query = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, fornecedorID) VALUES('$rua', '$numero', '$complemento', '$bairro', '$cep', '$cidade', '$estado', $last_id)";
-		mysqli_query($conexao, $query);
-	} else {
-		echo "SQL ERROR " . mysqli_error($conexao);
-	}
+	$providerDAO->atualizar($provider);
+	$addressDAO->atualizar($address);
+} else {
+	$providerDAO->inserir($provider);
+	$addressDAO->inserir($address);
 }
 
 header('location:/gestorvendas/app/pages/provider/list/list-provider.php');
-
-?>

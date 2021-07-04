@@ -1,9 +1,8 @@
 <?php
 
-//include '../../models/user.php';
-include 'mySqlDao.php';
 
-class UserDAO // extends MySqlDao
+
+class UserDAO
 {
 
     public function __construct()

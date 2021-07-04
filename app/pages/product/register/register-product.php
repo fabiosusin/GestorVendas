@@ -29,8 +29,8 @@ include '../../../scripts/product/register/get_product.php';
       <select class="default-input" name="providerId" value="<?php echo $provider ?>">
         <option>Selecione um fornecedor</option>
         <?php
-        while ($linha = mysqli_fetch_array($consulta_providers)) {
-          echo '<option value="' . $linha['id'] . '">' . $linha['nome'] . '</option>';
+        foreach($providers as $provider) {
+          echo '<option value="' . $provider->getId() . '">' . $provider->getNome() . '</option>';
         }
         ?>
       </select>

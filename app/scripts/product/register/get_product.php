@@ -1,27 +1,32 @@
 <?php
 
-include '../../../scripts/conexao/conexao.php';
+include '../../../DAO/mySqlDao.php';
+include '../../../DAO/produtoDAO.php';
+include '../../../DAO/fornecedorDAO.php';
+
+$productDAO = new ProdutoDAO();
+$providerDAO = new FornecedorDAO();
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $name = '';
 $description = '';
 $provider = '';
 
-$query = "SELECT * FROM fornecedor";
-$consulta_providers = mysqli_query($conexao, $query);
+$providers = $providerDAO->listarTodos();
 
 if (isset($id)) {
-    $query = "SELECT * FROM `produto` WHERE id = '$id'";
-    $find = mysqli_query($conexao, $query);
-    while ($line = mysqli_fetch_array($find)) {
-        $description = $line['descricao'];
-        $name = $line['nome'];
-        $providerId = $line['FornecedorID'];
-    }
+    $product = $productDAO->carregar($id);
+    if (!isset($product))
+        return;
+
+    $description = $product->getDescricao();
+    $name = $product->getNome();
+    $providerId = $product->getFornecedorID();
 
     if (isset($providerId)) {
-        $query_provider = "SELECT * FROM `fornecedor` WHERE id = '$providerId' limit 1";
-        $result_provider = mysqli_query($conexao, $query_provider);
-        $provider = ($result_provider->fetch_assoc())["nome"];
+        $providerModel = $providerDAO->carregar($providerId);
+        if (isset($providerModel))
+            return;
+        $provider = $providerModel->getNome();
     }
 }
