@@ -5,7 +5,7 @@ include '../../../DAO/mySqlDao.php';
 include '../../../models/fornecedor.php';
 include '../../../models/endereco.php';
 include '../../../DAO/fornecedorDAO.php';
-include '../../../DAO/estoqueDAO.php';
+include '../../../DAO/enderecoDAO.php';
 
 $providerDAO = new FornecedorDAO();
 $addressDAO = new EnderecoDAO();
@@ -26,13 +26,12 @@ $estado = $_POST['estado'];
 
 $provider = new Fornecedor($id, $nome, $descricao, $telefone, $email);
 $address = new Endereco('', $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado, '', $id);
-
 if (!empty($id)) {
 	$providerDAO->atualizar($provider);
-	$addressDAO->atualizar($address);
+//	$addressDAO->atualizar($address);
 } else {
 	$providerDAO->inserir($provider);
-	$addressDAO->inserir($address);
+//	$addressDAO->inserir($address);
 }
 
 header('location:/gestorvendas/app/pages/provider/list/list-provider.php');

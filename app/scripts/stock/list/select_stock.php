@@ -1,9 +1,8 @@
 <?php 
 
-include '../../../scripts/conexao/conexao.php';
+include '../../../DAO/mySqlDao.php';
+include '../../../DAO/estoqueDAO.php';
+include '../../../models/estoque.php';
 
-
-$query = "SELECT produto.id, produto.FornecedorID, produto.nome, estoque.quantidade, estoque.preco, estoque.ProdutoID as produto_id, fornecedor.id, fornecedor.nome as fornecedor_nome
-			FROM produto, estoque, fornecedor
-			WHERE produto.id = estoque.ProdutoID AND produto.FornecedorID = fornecedor.id";
-$find_user = mysqli_query($conexao, $query);
+$stock = new EstoqueDAO();
+$stocks = $stock->listarTodos();

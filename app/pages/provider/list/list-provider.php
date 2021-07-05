@@ -22,29 +22,28 @@ include_once("../../base/header.php");
     <tbody>
 
         <?php
-        foreach($providers as $provider) {
-            echo '<tr><td >' . $provider->getId() . '</td>';
-            echo '<td>' . $provider->getNome() . '</td>';
-            echo '<td>' . $provider->getDescricao() . '</td>';
-        ?>
-            <td>
-                <a href="../register/register-provider.php?id=<?php echo $provider->getId(); ?>">
-                    <span style="color: green;">
-                        <i class="fas fa-pencil-alt"></i>
-                    </span>
-                </a>
-            </td>
-            <td>
-                <a href="../../../scripts/provider/delete/delete_provider.php?id=<?php echo $provider->getId(); ?>">
-                    <span style="color: Tomato;">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                </a>
-            </td>
-            </tr>
-        <?php
+        if (isset($providers)) {
+            foreach ($providers as $provider) {
+                echo '<tr><td >' . $provider->getId() . '</td>';
+                echo '<td>' . $provider->getNome() . '</td>';
+                echo '<td>' . $provider->getDescricao() . '</td>';
+                echo '<td>
+                    <a href="../register/register-provider.php?id=' . $provider->getId() . '">
+                        <span style="color: green;">
+                            <i class="fas fa-pencil-alt"></i>
+                        </span>
+                    </a>
+                </td>
+                <td>
+                    <a href="../../../scripts/provider/delete/delete_provider.php?id=' . $provider->getId() . '">
+                        <span style="color: Tomato;">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                    </a>
+                </td>
+                </tr>';
+            }
         }
-
         ?>
     </tbody>
 </table>

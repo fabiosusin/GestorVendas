@@ -23,14 +23,14 @@ $cidade = '';
 $estado = '';
 
 if (!empty($id)) {
-    $provider = $providerDao->carregar($id);
+    $provider = $providerDAO->carregar($id);
     if (!isset($provider))
         return;
 
-    $nome = $priveder->getnome();
-    $descricao = $priveder->getdDescricao();
-    $telefone = $priveder->getRelefone();
-    $email = $priveder->getEmail();
+    $nome = $provider->getnome();
+    $descricao = $provider->getDescricao();
+    $telefone = $provider->getTelefone();
+    $email = $provider->getEmail();
 
     $address = $addressDAO->carregarIdFornecedor($id);
 

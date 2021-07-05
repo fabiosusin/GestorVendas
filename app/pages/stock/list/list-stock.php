@@ -13,8 +13,7 @@ include_once("../../base/header.php");
 <table class="table table-hover table-striped" id="provider">
     <thead>
         <tr>
-            <th>Nome do produto</th>
-            <th>Fornecedor</th>
+            <th>Código do produto</th>
             <th>Quantidade</th>
             <th>Preço</th>
             <th>Editar</th>
@@ -24,30 +23,30 @@ include_once("../../base/header.php");
     <tbody>
 
         <?php
-        while ($linha = mysqli_fetch_array($find_user)) {
-            echo '<tr><td >' . $linha['nome'] . '</td>';
-            echo '<td>' . $linha['fornecedor_nome'] . '</td>';
-            echo '<td>' . $linha['quantidade'] . '</td>';
-            echo '<td>' . "R$ " . $linha['preco'] . ",00" . '</td>';
+        if (isset($stocks)) {
+            foreach ($stocks as $stock) {
+                echo '<tr><td >' . $stock->getProdutoID() . '</td>';
+                echo '<td>' . $stock->getQuantidade() . '</td>';
+                echo '<td>' . "R$ " . $stock->getPreco() . ",00" . '</td>';
         ?>
-            <td>
-                <a href="../register/register-stock.php?id=<?php echo $linha['id']; ?>">
-                    <span style="color: green;">
-                        <i class="fas fa-pencil-alt"></i>
-                    </span>
-                </a>
-            </td>
-            <td>
-                <a href="../../../scripts/stock/delete/delete_stock.php?id=<?php echo $linha['id']; ?>">
-                    <span style="color: Tomato;">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                </a>
-            </td>
-            </tr>
+                <td>
+                    <a href="../register/register-stock.php?id=<?php echo $stock->getId(); ?>">
+                        <span style="color: green;">
+                            <i class="fas fa-pencil-alt"></i>
+                        </span>
+                    </a>
+                </td>
+                <td>
+                    <a href="../../../scripts/stock/delete/delete_stock.php?id=<?php echo $stock->getId(); ?>">
+                        <span style="color: Tomato;">
+                            <i class="fas fa-trash-alt"></i>
+                        </span>
+                    </a>
+                </td>
+                </tr>
         <?php
+            }
         }
-
         ?>
     </tbody>
 </table>

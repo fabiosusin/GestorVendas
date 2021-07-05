@@ -26,11 +26,13 @@ include '../../../scripts/product/register/get_product.php';
     </div>
     <div class="col-md-12 input-with-icon">
       <i class="fas fa-lock icon"></i>
-      <select class="default-input" name="providerId" value="<?php echo $provider ?>">
+      <select class="default-input" name="providerId" value="<?php echo $providerName ?>">
         <option>Selecione um fornecedor</option>
         <?php
-        foreach($providers as $provider) {
-          echo '<option value="' . $provider->getId() . '">' . $provider->getNome() . '</option>';
+        if (empty($providers))
+          return;
+        foreach ($providers as $provider) {
+          echo '<option value="' . $provider->getId() . '" ' . ($providerName == $provider->getNome() ? 'selected' : '') . '>' . $provider->getNome() . '</option>';
         }
         ?>
       </select>

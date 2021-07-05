@@ -4,7 +4,7 @@
 include '../../../DAO/mySqlDao.php';
 include '../../../models/fornecedor.php';
 include '../../../DAO/fornecedorDAO.php';
-include '../../../DAO/estoqueDAO.php';
+include '../../../DAO/enderecoDAO.php';
 
 $providerDAO = new FornecedorDAO();
 $addressDAO = new EnderecoDAO();

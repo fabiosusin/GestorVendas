@@ -15,8 +15,10 @@ include '../../../scripts/stock/register/get_stock.php';
             <select class="default-input" name="product" value="<?php echo $product ?>">
                 <option>Selecione um produto</option>
                 <?php
-                while ($linha = mysqli_fetch_array($consulta_products_estoque)) {
-                    echo '<option value="' . $linha['id'] . '">' . $linha['produto_nome'] . '</option>';
+                if (isset($products)) {
+                    foreach ($products as $product) {
+                        echo '<option value="' . $product->getId() . '" ' . ($product->getId() == $productId ? 'selected' : '') . '>' . $product->getNome() . '</option>';
+                    }
                 }
                 ?>
             </select>

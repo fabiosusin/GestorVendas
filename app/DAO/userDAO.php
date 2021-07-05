@@ -39,12 +39,13 @@ class UserDAO
 
         $stmt->execute();
 
-        $stmt = $this->conn->prepare("SELECT * FROM cliente WHERE nome = :nome, senha = :senha limit 1");
+        $stmt = $this->conn->prepare("SELECT * FROM cliente WHERE nome = :nome and senha = :senha limit 1");
         $stmt->bindParam(":nome", $nome);
         $stmt->bindParam(':senha', $senha);
         $stmt->execute();
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-            $last_id = $row['id'];
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $last_id = $row['id'];
+        echo $nome . ' ' . $senha;
 
         $query_endereco = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) 
             VALUES(:rua, :numero, :complemento, :bairro, :cep, :cidade, :estado, :id)";
@@ -59,6 +60,9 @@ class UserDAO
         $stmt->bindParam(':numero', $numero);
         $stmt->bindParam(':rua', $rua);
         $stmt->bindParam(':id', $last_id);
+
+        echo $last_id;
+        echo $query_endereco;
 
         $stmt->execute();
     }
@@ -165,17 +169,59 @@ class UserDAO
         return new User($id, $senha, $nome, $email, $telefone, $cartao, $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado);
     }
 
+    public function getByUserAndPassword($user, $pass)
+    {
+        $query = "SELECT * FROM cliente WHERE login = :user and senha = :pass";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':user', $user);
+        $stmt->bindParam(':pass', $pass);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nome = $row['nome'];
+        $cartao = $row['cartaoCredito'];
+        $telefone = $row['telefone'];
+        $email = $row['email'];
+        $senha = $row['senha'];
+        $id = $row['id'];
+        $rua = '';
+        $numero = '';
+        $complemento = '';
+        $bairro = '';
+        $cep = '';
+        $cidade = '';
+        $estado = '';
+
+        if (isset($id)) {
+            $query_endereco = "SELECT * FROM endereco WHERE ClienteID = '$id' limit 1";
+            $stmt = $this->conn->prepare($query_endereco);
+            $stmt->bindParam(1, $id);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $rua = $row["rua"];
+                $numero = $row['numero'];
+                $complemento = $row['complemento'];
+                $bairro = $row['bairro'];
+                $cep = $row['cep'];
+                $cidade = $row['cidade'];
+                $estado = $row['estado'];
+            }
+        }
+
+        return new User($id, $senha, $nome, $email, $telefone, $cartao, $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado);
+    }
+
     public function deletebyId($id)
     {
 
         $query = "DELETE FROM ENDERECO WHERE ClienteID = :id";
-        
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
         $query = "DELETE FROM CLIENTE WHERE id = $id";
-                
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

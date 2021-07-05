@@ -1,21 +1,21 @@
-<?php 
+<?php
 
-include '../../scripts/conexao/conexao.php';
+include '../../../app/DAO/mySqlDao.php';
+include '../../../app/DAO/userDAO.php';
+include '../../../app/models/user.php';
+
+$userDAO = new UserDAO();
 
 $usuario = addslashes($_POST['usuario']);
 $senha = addslashes($_POST['senha']);
 
-$query = "SELECT * FROM USUARIOS WHERE login = '$usuario' and senha = '$senha' limit 1";
-echo $query;
-$consulta = mysqli_query($conexao, $query);
+$user = $userDAO->getByUserAndPassword($usuario, $senha);
 
-if(mysqli_num_rows($consulta) == 1){
-
+if (isset($user)) {
 	session_start();
 	$_SESSION['login'] = true;
 	$_SESSION['usuario'] = $usuario;
 
 	header('location:../../pages/home/site.php');
-}
-else
+} else
 	header('location:/gestorvendas/app/pages/login/login.php');

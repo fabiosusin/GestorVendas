@@ -1,6 +1,14 @@
 <?php
 
-include '../../../scripts/conexao/conexao.php';
+include '../../../DAO/mySqlDao.php';
+include '../../../DAO/estoqueDAO.php';
+include '../../../models/estoque.php';
+include '../../../DAO/produtoDAO.php';
+include '../../../models/produto.php';
+
+$stockDAO = new EstoqueDAO();
+$productDAO = new ProdutoDAO();
+$products = $productDAO->listarTodos();
 
 $id =  isset($_GET['id']) ? $_GET['id'] : '';
 $product = '';
@@ -8,29 +16,10 @@ $type = 'Entrada';
 $quantity = '';
 $price = '';
 
+$stock = $stockDAO->carregar($id);
+if (!isset($stock))
+    return;
 
-$query = "SELECT 
-          produto.id, produto.nome as produto_nome
-          FROM 
-          produto 
-          WHERE produto.id
-          not in ( select estoque.ProdutoID FROM estoque)";
-$consulta_products_estoque = mysqli_query($conexao, $query);
-
-if (!empty($id)) {
-    $query = "SELECT * FROM estoque WHERE id = $id";
-    $find = mysqli_query($conexao, $query);
-    while ($line = mysqli_fetch_array($find)) {
-        $quantity = $line['quantidade'];
-        $price = $line['preco'];
-        $productId = $line['ProdutoID'];
-
-        if (isset($productId)) {
-            $query_Product = "SELECT * FROM produto WHERE id = '$productId' limit 1";
-            $findProduct = mysqli_query($conexao, $query_Product);
-
-            while ($productRow = mysqli_fetch_array($findProduct))
-                $product = $productRow["nome"];
-        }
-    }
-}
+$quantity =  $stock->getQuantidade();
+$price =  $stock->getPreco();
+$productId = $stock->getProdutoID();

@@ -1,6 +1,8 @@
 <?php
 
 include '../../../DAO/mySqlDao.php';
+include '../../../models/fornecedor.php';
+include '../../../models/produto.php';
 include '../../../DAO/produtoDAO.php';
 include '../../../DAO/fornecedorDAO.php';
 
@@ -10,7 +12,7 @@ $providerDAO = new FornecedorDAO();
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $name = '';
 $description = '';
-$provider = '';
+$providerName = '';
 
 $providers = $providerDAO->listarTodos();
 
@@ -22,11 +24,11 @@ if (isset($id)) {
     $description = $product->getDescricao();
     $name = $product->getNome();
     $providerId = $product->getFornecedorID();
-
+    
     if (isset($providerId)) {
         $providerModel = $providerDAO->carregar($providerId);
-        if (isset($providerModel))
+        if (!isset($providerModel))
             return;
-        $provider = $providerModel->getNome();
+        $providerName = $providerModel->getNome();
     }
 }

@@ -25,5 +25,4 @@ if (!empty($id))
 else
     $productDAO->inserir($product);
 
-
 header('location:../../../pages/product/list/list-product.php');

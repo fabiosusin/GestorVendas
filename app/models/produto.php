@@ -12,16 +12,16 @@ class Produto
 
 	private $descricao;
 
-	private $foto;
+	private $fotoUrl;
 
 	private $FornecedorID;
 
-	public function __construct($id, $nome, $descricao, $foto, $FornecedorID)
+	public function __construct($id, $nome, $descricao, $fotoUrl, $FornecedorID)
 	{
 		$this->id = $id;
 		$this->nome = $nome;
 		$this->descricao = $descricao;
-		$this->foto = $foto;
+		$this->fotoUrl = $fotoUrl;
 		$this->FornecedorID = $FornecedorID;
 	}
 
@@ -41,9 +41,9 @@ class Produto
 		return $this->descricao;
 	}
 
-	public function getFoto()
+	public function getFotoUrl()
 	{
-		return $this->foto;
+		return $this->fotoUrl;
 	}
 
 	public function getFornecedorID()
@@ -67,9 +67,9 @@ class Produto
 		$this->descricao = $descricao;
 	}
 
-	public function setFoto($foto)
+	public function setFotoUrl($fotoUrl)
 	{
-		$this->foto = $foto;
+		$this->fotoUrl = $fotoUrl;
 	}
 
 	public function setFornecedorID($FornecedorID)

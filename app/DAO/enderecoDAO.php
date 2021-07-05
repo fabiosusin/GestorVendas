@@ -58,7 +58,7 @@ class EnderecoDAO{
 	//Insere um elemento na tabela
 	public function inserir($endereco){
 		
-		$sql = 'INSERT INTO endereco (id, rua, numero, complemento, bairro, cep, cidade, estado, ClienteID, FornecedorID) VALUES (:id, :rua, :numero, :complemento, :bairro, :cep, :cidade, :estado, :ClienteID, :FornecedorID)';
+		$sql = 'INSERT INTO endereco (rua, numero, complemento, bairro, cep, cidade, estado, ClienteID, FornecedorID) VALUES (:rua, :numero, :complemento, :bairro, :cep, :cidade, :estado, :ClienteID, :FornecedorID)';
 		$consulta = $this->conn->prepare($sql);
 		$consulta->bindValue(':id',$endereco->getId()); 
 
@@ -87,9 +87,9 @@ class EnderecoDAO{
 	
 	//Atualiza um elemento na tabela
 	public function atualizar($endereco){
-		include("conexao.php");
+		
 		$sql = 'UPDATE endereco SET id = :id, rua = :rua, numero = :numero, complemento = :complemento, bairro = :bairro, cep = :cep, cidade = :cidade, estado = :estado, ClienteID = :ClienteID, FornecedorID = :FornecedorID WHERE id = :id';
-		$consulta = $conexao->prepare($sql);
+		$consulta = $this->conn->prepare($sql);
 		$consulta->bindValue(':id',$endereco->getId()); 
 
 		$consulta->bindValue(':rua',$endereco->getRua()); 
@@ -117,9 +117,9 @@ class EnderecoDAO{
 
 	//Apaga todos os elementos da tabela
 	public function limparTabela(){
-		include("conexao.php");
+		
 		$sql = 'DELETE FROM endereco';
-		$consulta = $conexao->prepare($sql);
+		$consulta = $this->conn->prepare($sql);
 		if($consulta->execute())
 			return true;
 		else

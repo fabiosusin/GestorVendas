@@ -5,7 +5,8 @@ class MySqlDAO
     #Conexão com o banco de dados MYSQL *******************************
     private $servidor = "localhost";
     private $usuario = "root";
-    private $bdSenha = "123gio123";
+    private $bdSenha = "";
+    //private $bdSenha = "123gio123";
     private $database = "gestorvendas";
     public $conn;
 

@@ -19,11 +19,11 @@ class ProdutoDAO
 		$consulta = $this->conn->prepare($sql);
 		$consulta->bindValue(":id", $id);
 		$consulta->execute();
-		$array = $consulta->fetchAll(PDO::FETCH_ASSOC);
-		if (empty($array))
-			return null;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$products = new Produto($row['id'], $row['nome'], $row['descricao'], $row['fotoUrl'], $row['FornecedorID']);
+		}
 
-		return array_values($array)[0];
+		return isset($products) ? $products : null;
 	}
 
 	//Lista todos os elementos da tabela
@@ -33,7 +33,11 @@ class ProdutoDAO
 		$sql = 'SELECT * FROM produto';
 		$consulta = $this->conn->prepare($sql);
 		$consulta->execute();
-		return ($consulta->fetchAll(PDO::FETCH_ASSOC));
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$products[] = new Produto($row['id'], $row['nome'], $row['descricao'], $row['fotoUrl'], $row['FornecedorID']);
+		}
+
+		return isset($products) ? $products : null;
 	}
 
 	//Lista todos os elementos da tabela listando ordenados por uma coluna específica
@@ -63,15 +67,14 @@ class ProdutoDAO
 	public function inserir($produto)
 	{
 
-		$sql = 'INSERT INTO produto (id, nome, descricao, foto, FornecedorID) VALUES (:id, :nome, :descricao, :foto, :FornecedorID)';
+		$sql = 'INSERT INTO produto (nome, descricao, fotoUrl, FornecedorID) VALUES (:nome, :descricao, :fotoUrl, :FornecedorID)';
 		$consulta = $this->conn->prepare($sql);
-		$consulta->bindValue(':id', $produto->getId());
 
 		$consulta->bindValue(':nome', $produto->getNome());
 
 		$consulta->bindValue(':descricao', $produto->getDescricao());
 
-		$consulta->bindValue(':foto', $produto->getFoto());
+		$consulta->bindValue(':fotoUrl', $produto->getFotoUrl());
 
 		$consulta->bindValue(':FornecedorID', $produto->getFornecedorID());
 		if ($consulta->execute())
@@ -84,7 +87,7 @@ class ProdutoDAO
 	public function atualizar($produto)
 	{
 
-		$sql = 'UPDATE produto SET id = :id, nome = :nome, descricao = :descricao, foto = :foto, FornecedorID = :FornecedorID WHERE id = :id';
+		$sql = 'UPDATE produto SET id = :id, nome = :nome, descricao = :descricao, fotoUrl = :fotoUrl, FornecedorID = :FornecedorID WHERE id = :id';
 		$consulta = $this->conn->prepare($sql);
 		$consulta->bindValue(':id', $produto->getId());
 
@@ -92,7 +95,7 @@ class ProdutoDAO
 
 		$consulta->bindValue(':descricao', $produto->getDescricao());
 
-		$consulta->bindValue(':foto', $produto->getFoto());
+		$consulta->bindValue(':fotoUrl', $produto->getFotoUrl());
 
 		$consulta->bindValue(':FornecedorID', $produto->getFornecedorID());
 		if ($consulta->execute())

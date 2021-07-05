@@ -48,9 +48,8 @@ class PedidoDAO{
 	//Insere um elemento na tabela
 	public function inserir($pedido){
 		
-		$sql = 'INSERT INTO pedido (id, numero, dataPedido, dataEntrega, situacao, ClienteID, ProdutoID) VALUES (:id, :numero, :dataPedido, :dataEntrega, :situacao, :ClienteID, :ProdutoID)';
+		$sql = 'INSERT INTO pedido (numero, dataPedido, dataEntrega, situacao, ClienteID, ProdutoID) VALUES (:numero, :dataPedido, :dataEntrega, :situacao, :ClienteID, :ProdutoID)';
 		$consulta = $this->conn->prepare($sql);
-		$consulta->bindValue(':id',$pedido->getId()); 
 
 		$consulta->bindValue(':numero',$pedido->getNumero()); 
 
@@ -71,9 +70,9 @@ class PedidoDAO{
 	
 	//Atualiza um elemento na tabela
 	public function atualizar($pedido){
-		include("conexao.php");
+		
 		$sql = 'UPDATE pedido SET id = :id, numero = :numero, dataPedido = :dataPedido, dataEntrega = :dataEntrega, situacao = :situacao, ClienteID = :ClienteID, ProdutoID = :ProdutoID WHERE id = :id';
-		$consulta = $conexao->prepare($sql);
+		$consulta = $this->conn->prepare($sql);
 		$consulta->bindValue(':id',$pedido->getId()); 
 
 		$consulta->bindValue(':numero',$pedido->getNumero()); 
@@ -95,9 +94,9 @@ conn
 
 	//Apaga todos os elementos da tabela
 	public function limparTabela(){
-		include("conexao.php");
+		
 		$sql = 'DELETE FROM pedido';
-		$consulta = $conexao->prepare($sql);
+		$consulta = $this->conn->prepare($sql);
 		if($consulta->execute())
 			return true;
 		else

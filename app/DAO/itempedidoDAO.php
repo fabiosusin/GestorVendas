@@ -54,9 +54,8 @@ class ItempedidoDAO{
 	//Insere um elemento na tabela
 	public function inserir($itempedido){
 		
-		$sql = 'INSERT INTO itempedido (id, quantidade, preco, PedidoID, ProdutoID) VALUES (:id, :quantidade, :preco, :PedidoID, :ProdutoID)';
+		$sql = 'INSERT INTO itempedido (quantidade, preco, PedidoID, ProdutoID) VALUES (:quantidade, :preco, :PedidoID, :ProdutoID)';
 		$consulta = $this->conn->prepare($sql);
-		$consulta->bindValue(':id',$itempedido->getId()); 
 
 		$consulta->bindValue(':quantidade',$itempedido->getQuantidade()); 
 
@@ -73,9 +72,9 @@ class ItempedidoDAO{
 	
 	//Atualiza um conno na tabela
 	public function atualizar($itempedido){
-		include("conexao.php");
+		
 		$sql = 'UPDATE itempedido SET id = :id, quantidade = :quantidade, preco = :preco, PedidoID = :PedidoID, ProdutoID = :ProdutoID WHERE id = :id';
-		$consulta = $conexao->prepare($sql);
+		$consulta = $this->conn->prepare($sql);
 		$consulta->bindValue(':id',$itempedido->getId()); 
 
 		$consulta->bindValue(':quantidade',$itempedido->getQuantidade()); 
@@ -93,9 +92,9 @@ class ItempedidoDAO{
 
 	//Apaga todos os elementos da tabela
 	public function limparTabela(){
-		include("conexao.php");
+		
 		$sql = 'DELETE FROM itempedido';
-		$consulta = $conexao->prepare($sql);
+		$consulta = $this->conn->prepare($sql);
 		if($consulta->execute())
 			return true;
 		else

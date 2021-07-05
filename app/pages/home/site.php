@@ -4,7 +4,13 @@ $page_title = 'Home';
 $page_css_links = ['/home/site.css'];
 $page_scripts_links = ['/home/site.js'];
 include_once("../base/header.php");
-include_once("../../scripts/conexao/conexao.php");
+
+include '../../DAO/mySqlDao.php';
+include '../../models/produto.php';
+include '../../DAO/produtoDAO.php';
+
+$conexao = new MySqlDAO();
+$conexao->getConnection();
 
 $name = isset($_GET['name']) ? $_GET['name'] : '';
 $where = 'where estoque.ProdutoID IS NOT NULL';
@@ -12,7 +18,7 @@ if (isset($name))
   $where .= " and produto.nome like '%$name%'";
 
 $query = "SELECT * FROM produto LEFT JOIN estoque ON produto.id = estoque.ProdutoID $where";
-$consulta_products = mysqli_query($conexao, $query);
+$consulta_products = mysqli_query($conexao->conn, $query);
 ?>
 
 <main>
