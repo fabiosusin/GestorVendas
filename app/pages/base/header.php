@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+$user = $_SESSION['usuario'] ?? '';
+$admin = $_SESSION['admin'] ?? '';
+$logged = $_SESSION['logged'] ?? false;
+
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -37,13 +45,28 @@
             <i class="fas fa-search icon"></i>
             <input class="default-input" placeholder="Pesquisar Produtos" />
         </form>
-        <div class="buttons">
-            <a href="/GestorVendas/app/pages/login/login.php"><i class="fas fa-user"></i></a>
-            <a href="/GestorVendas/app/pages/cart/cart.php"><i class="fas fa-shopping-bag"></i></a>
-            <!-- <a href="/GestorVendas/app/pages/user/register/register-user.php"><i class="fas fa-user"></i><span> Usuário</span></a>
-            <a href="/GestorVendas/app/pages/provider/register/register-provider.php"><i class="fas fa-user"></i> <span>Fornecedor</span></a>
-            <a href="/GestorVendas/app/pages/product/register/register-product.php"><i class="fas fa-boxes"></i> <span>Produto</span></a>
-            <a href="/GestorVendas/app/pages/stock/register/register-stock.php"><i class="fas fa-boxes"></i> <span>Estoque</span></a> -->
+        <div class="buttons <?php echo ($admin ? 'w-120' : '') ?>">
+            <?php
+            if ($logged && !$admin) {
+                echo '<a href="/GestorVendas/app/pages/login/login.php"><i class="fas fa-user"></i></a>';
+                echo '<a href="/GestorVendas/app/pages/cart/cart.php"><i class="fas fa-shopping-bag"></i></a>';
+            }
+            if ($admin) {
+                echo '';
+            }
+            ?>
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-align-justify"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/user/list/list-user.php"><span> Usuário</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/provider/list/list-provider.php"> <span>Fornecedor</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/product/list/list-product.php"> <span>Produto</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/stock/list/list-stock.php"> <span>Estoque</span></a>
+                </div>
+            </div>
         </div>
 
     </header>

@@ -4,13 +4,7 @@ $page_title = 'Home';
 $page_css_links = ['/home/site.css'];
 $page_scripts_links = ['/home/site.js'];
 include_once("../base/header.php");
-
-include '../../DAO/mySqlDao.php';
-include '../../models/produto.php';
-include '../../DAO/produtoDAO.php';
-
-$conexao = new MySqlDAO();
-$conexao->getConnection();
+include_once("../../scripts/conexao/conexao.php");
 
 $name = isset($_GET['name']) ? $_GET['name'] : '';
 $where = 'where estoque.ProdutoID IS NOT NULL';
@@ -18,14 +12,13 @@ if (isset($name))
   $where .= " and produto.nome like '%$name%'";
 
 $query = "SELECT * FROM produto LEFT JOIN estoque ON produto.id = estoque.ProdutoID $where";
-$consulta_products = mysqli_query($conexao->conn, $query);
+$consulta_products = mysqli_query($conexao, $query);
 ?>
 
 <main>
   <div class="page" name="site">
     <div class="images">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
+      <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -62,7 +55,7 @@ $consulta_products = mysqli_query($conexao->conn, $query);
       <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-      </a>
+      </a> -->
     </div>
     <div class="title">
       <p>Seja Bem Vindo

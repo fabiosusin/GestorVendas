@@ -17,7 +17,7 @@ include '../../../scripts/product/register/get_product.php';
           <a class="remove-picture" name="remove-picture"><i class="fas fa-times"></i></a>
         </div>
         <i class="fas fa-camera" name="icon"></i>
-        <input type="file" id="picture" name="picture" accept="image/png, image/jpeg" />
+        <input type="file" id="picture" name="picture" />
       </button>
     </div>
     <div class="col-md-12 input-with-icon">

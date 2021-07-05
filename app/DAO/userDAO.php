@@ -45,7 +45,6 @@ class UserDAO
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $last_id = $row['id'];
-        echo $nome . ' ' . $senha;
 
         $query_endereco = "INSERT INTO ENDERECO(rua, numero, complemento, bairro, cep, cidade, estado, clienteID) 
             VALUES(:rua, :numero, :complemento, :bairro, :cep, :cidade, :estado, :id)";
@@ -60,9 +59,6 @@ class UserDAO
         $stmt->bindParam(':numero', $numero);
         $stmt->bindParam(':rua', $rua);
         $stmt->bindParam(':id', $last_id);
-
-        echo $last_id;
-        echo $query_endereco;
 
         $stmt->execute();
     }
@@ -171,6 +167,7 @@ class UserDAO
 
     public function getByUserAndPassword($user, $pass)
     {
+
         $query = "SELECT * FROM cliente WHERE login = :user and senha = :pass";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':user', $user);
@@ -178,6 +175,8 @@ class UserDAO
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!isset($row) || empty($row))
+            return;
         $nome = $row['nome'];
         $cartao = $row['cartaoCredito'];
         $telefone = $row['telefone'];

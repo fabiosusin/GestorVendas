@@ -38,14 +38,37 @@ header .buttons {
     font-size: 20px;
 }
 
+header .buttons.w-120 {
+    width: 120px;
+}
+
 header .logo,
 header .buttons a {
     text-decoration: none;
     color: var(--main-color);
 }
 
+header .buttons a:hover {
+    color: var(--main-color);
+}
+
 header .buttons a i {
     font-size: 20px;
+}
+
+header .buttons a span {
+    width: 100%;
+}
+
+.open>.dropdown-menu {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.dropdown-menu .dropdown-item {
+    min-width: 140px;
+    margin: 5px;
 }
 
 body {
@@ -206,6 +229,26 @@ main {
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: var(--background-color);
+}
+
+.list-page {
+    width: 80%;
+    height: 100vh;
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.list-page .btn-success {
+    height: 70px;
+    font-weight: bold;
+    background: var(--main-color);
+    width: 70px;
+    border-radius: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

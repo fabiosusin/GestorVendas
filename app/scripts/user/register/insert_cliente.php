@@ -24,4 +24,4 @@ if (!empty($id))
 else
 	$userDao->insert(new User($id, $senha, $nome, $email, $telefone, $cartao, $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado));
 
-header('location:/gestorvendas/app/pages/user/list/list-user.php');
+header('location:/gestorvendas/app/pages/home/site.php');
