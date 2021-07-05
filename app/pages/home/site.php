@@ -18,7 +18,7 @@ $consulta_products = mysqli_query($conexao, $query);
 <main>
   <div class="page" name="site">
     <div class="images">
-      <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -27,15 +27,15 @@ $consulta_products = mysqli_query($conexao, $query);
 
         <div class="carousel-inner">
           <div class="item active">
-            <img src="https://offerszing.com/wp-content/uploads/2021/03/training-sales-team-investment-open-graph.png" alt="First slide" style="width:100%;">
+            <img src="../../assets/images/png/imagem1.jpg" alt="First slide" style="width:100%;">
           </div>
 
           <div class="item">
-            <img src="https://www.smarthint.co/wp-content/uploads/2019/03/futuro-do-ecommerce.jpg" alt="Chicago" style="width:100%;">
+            <img src="../../assets/images/png/imagem2.webp" alt="Chicago" style="width:100%;">
           </div>
 
           <div class="item">
-            <img src="https://neilpatel.com/wp-content/uploads/2019/10/mini-caixas-de-compras-sob-teclado-de-laptop-1.jpeg" alt="First slide" style="width:100%;">
+            <img src="../../assets/images/png/imagem3.webp" alt="First slide" style="width:100%;">
           </div>
         </div>
 
@@ -55,7 +55,7 @@ $consulta_products = mysqli_query($conexao, $query);
       <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-      </a> -->
+      </a>
     </div>
     <div class="title">
       <p>Seja Bem Vindo

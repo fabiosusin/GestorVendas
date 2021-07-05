@@ -2,7 +2,8 @@
 
 session_start();
 
-unset($_SESSION['login']);
+unset($_SESSION['admind']);
+unset($_SESSION['logged']);
 unset($_SESSION['usuario']);
 
-header('location:login.php');
+header('location:../../pages/home/site.php');

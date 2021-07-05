@@ -168,7 +168,7 @@ class UserDAO
     public function getByUserAndPassword($user, $pass)
     {
 
-        $query = "SELECT * FROM cliente WHERE login = :user and senha = :pass";
+        $query = "SELECT * FROM cliente WHERE email = :user and senha = :pass";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':user', $user);
         $stmt->bindParam(':pass', $pass);

@@ -235,12 +235,19 @@ main {
     width: 80%;
     height: 100vh;
     margin-top: 80px;
+}
+
+.list-page .bg-btn {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: flex-end;
 }
 
-.list-page .btn-success {
+table .edit {
+    color: var(--main-color);
+}
+
+.list-page .bg-btn .btn-success {
     height: 70px;
     font-weight: bold;
     background: var(--main-color);
@@ -249,6 +256,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 
@@ -262,6 +270,12 @@ main {
 
 @media (max-width: 700px) {
     .form {
+        width: 100%;
+    }
+    header .buttons.w-120 {
+        width: 70px;
+    }
+    .list-page {
         width: 100%;
     }
 }

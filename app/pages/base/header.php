@@ -2,7 +2,7 @@
 
 session_start();
 $user = $_SESSION['usuario'] ?? '';
-$admin = $_SESSION['admin'] ?? '';
+$admin = $_SESSION['admin'] ?? false;
 $logged = $_SESSION['logged'] ?? false;
 
 ?>
@@ -47,15 +47,14 @@ $logged = $_SESSION['logged'] ?? false;
         </form>
         <div class="buttons <?php echo ($admin ? 'w-120' : '') ?>">
             <?php
-            if ($logged && !$admin) {
+            if (!$logged)
                 echo '<a href="/GestorVendas/app/pages/login/login.php"><i class="fas fa-user"></i></a>';
-                echo '<a href="/GestorVendas/app/pages/cart/cart.php"><i class="fas fa-shopping-bag"></i></a>';
-            }
-            if ($admin) {
-                echo '';
-            }
-            ?>
-            <div class="dropdown show">
+            else if ($logged && !$admin)
+                echo '
+                <a href="../../scripts/logout/logout.php"><i class="fas fa-sign-out-alt"></i></a>
+                <a href="/GestorVendas/app/pages/cart/cart.php"><i class="fas fa-shopping-bag"></i></a>';
+            else {
+                echo '<div class="dropdown show">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-align-justify"></i>
                 </a>
@@ -65,8 +64,11 @@ $logged = $_SESSION['logged'] ?? false;
                     <a class="dropdown-item" href="/GestorVendas/app/pages/provider/list/list-provider.php"> <span>Fornecedor</span></a>
                     <a class="dropdown-item" href="/GestorVendas/app/pages/product/list/list-product.php"> <span>Produto</span></a>
                     <a class="dropdown-item" href="/GestorVendas/app/pages/stock/list/list-stock.php"> <span>Estoque</span></a>
+                    <a class="dropdown-item" href="../../scripts/logout/logout.php"> <span>Sair</span></a>
                 </div>
-            </div>
+            </div>';
+            }
+            ?>
         </div>
 
     </header>

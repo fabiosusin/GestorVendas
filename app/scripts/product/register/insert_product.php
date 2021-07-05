@@ -16,7 +16,7 @@ $pathName = '';
 if ($realName != '') {
     $realName = str_replace(" ", "_", $realName);
     $pathName = "shared/upload/$realName";
-    copy($tempName, $pathName);
+    copy($tempName, '../../../' . $pathName);
 }
 
 $product = new Produto($id, $name, $description, $pathName, $providerId);

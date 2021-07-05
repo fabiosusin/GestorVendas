@@ -8,8 +8,9 @@ include_once("../../base/header.php");
 
 ?>
 <div class="list-page">
-    <a class="btn btn-success" href="../register/register-product.php">NOVO</a>
-
+    <div class="bg-btn">
+        <a class="btn btn-success" href="../register/register-product.php">NOVO</a>
+    </div>
     <table class="table table-hover table-striped" id="products">
         <thead>
             <tr>
@@ -31,7 +32,7 @@ include_once("../../base/header.php");
             ?>
                     <td>
                         <a href="../register/register-product.php?id=<?php echo $product->getId(); ?>">
-                            <span style="color: green;">
+                            <span class="edit">
                                 <i class="fas fa-pencil-alt"></i>
                             </span>
                         </a>
