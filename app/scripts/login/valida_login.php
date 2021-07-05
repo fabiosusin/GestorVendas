@@ -11,7 +11,6 @@ $senha = addslashes($_POST['senha']);
 
 $admin = $senha == 'nest' && $usuario == 'teste@teste.com';
 $user = $userDAO->getByUserAndPassword($usuario, $senha);
-
 if (isset($user) || $admin) {
 	session_start();
 	$_SESSION['usuario'] = $usuario;
@@ -19,5 +18,5 @@ if (isset($user) || $admin) {
 	$_SESSION['logged'] = true;
 
 	header('location:../../pages/home/site.php');
-} else
-	header('location:/gestorvendas/app/pages/login/login.php');
+} //else
+	//header('location:/gestorvendas/app/pages/login/login.php');
