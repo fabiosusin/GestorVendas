@@ -20,7 +20,7 @@ class ProdutoDAO
 		$consulta->bindValue(":id", $id);
 		$consulta->execute();
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-			$products = new Produto($row['id'], $row['nome'], $row['descricao'], $row['fotoUrl'], $row['FornecedorID']);
+			$products = new Produto($row['id'], $row['nome'], $row['descricao'], $row['fotoUrl'], $row['FornecedorID'],'');
 		}
 
 		return isset($products) ? $products : null;
@@ -30,11 +30,11 @@ class ProdutoDAO
 	public function listarTodos()
 	{
 
-		$sql = 'SELECT * FROM produto';
+		$sql = 'SELECT produto.*, fornecedor.nome as fornecedorNome FROM produto LEFT JOIN fornecedor ON produto.FornecedorID = fornecedor.id';
 		$consulta = $this->conn->prepare($sql);
 		$consulta->execute();
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-			$products[] = new Produto($row['id'], $row['nome'], $row['descricao'], $row['fotoUrl'], $row['FornecedorID']);
+			$products[] = new Produto($row['id'], $row['nome'], $row['descricao'], $row['fotoUrl'], $row['FornecedorID'], $row['fornecedorNome']);
 		}
 
 		return isset($products) ? $products : null;

@@ -13,6 +13,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 $name = '';
 $description = '';
 $providerName = '';
+$picture = '';
 
 $providers = $providerDAO->listarTodos();
 
@@ -24,6 +25,7 @@ if (isset($id)) {
     $description = $product->getDescricao();
     $name = $product->getNome();
     $providerId = $product->getFornecedorID();
+    $picture = $product->getFotoUrl();
     
     if (isset($providerId)) {
         $providerModel = $providerDAO->carregar($providerId);

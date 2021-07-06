@@ -15,7 +15,7 @@ include_once("../../base/header.php");
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Código Fornecedor</th>
+                <th>Fornecedor</th>
                 <th>Descricao</th>
                 <th>Editar</th>
                 <th>Deletar</th>
@@ -27,7 +27,7 @@ include_once("../../base/header.php");
             if (isset($products)) {
                 foreach ($products as $product) {
                     echo '<tr><td >' . $product->getNome() . '</td>';
-                    echo '<td>' . $product->getFornecedorID() . '</td>';
+                    echo '<td>' . $product->getFornecedor() . '</td>';
                     echo '<td>' . $product->getDescricao() . '</td>';
             ?>
                     <td>

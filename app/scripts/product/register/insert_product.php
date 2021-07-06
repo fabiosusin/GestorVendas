@@ -19,7 +19,7 @@ if ($realName != '') {
     copy($tempName, '../../../' . $pathName);
 }
 
-$product = new Produto($id, $name, $description, $pathName, $providerId);
+$product = new Produto($id, $name, $description, $pathName, $providerId,'');
 if (!empty($id))
     $productDAO->atualizar($product);
 else

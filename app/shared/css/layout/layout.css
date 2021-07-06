@@ -221,6 +221,39 @@ main {
     margin: 5px;
 }
 
+.list-page {
+    width: 80%;
+    height: 100vh;
+    margin-top: 100px;
+}
+
+.list-page .bg-btn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.list-page .bg-btn a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--main-color);
+    height: 70px;
+    width: 70px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.list-page .edit {
+    color: var(--main-color);
+}
+
+.table-hover>tbody>tr:hover {
+    background: var(--background-color);
+}
+
 
 /* #end-region */
 
@@ -231,6 +264,9 @@ main {
 }
 
 @media (max-width: 700px) {
+    .list-page {
+        width: 100%;
+    }
     .form {
         width: 100%;
     }

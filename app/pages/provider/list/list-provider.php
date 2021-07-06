@@ -17,6 +17,7 @@ include_once("../../base/header.php");
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Descricao</th>
+                <th>Editar</th>
                 <th>Deletar</th>
             </tr>
         </thead>

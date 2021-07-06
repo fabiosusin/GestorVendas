@@ -26,7 +26,7 @@ include_once("../../base/header.php");
       </div>
       <div class="col-md-12 textarea-with-icon">
         <i class="fas fa-credit-card icon"></i>
-        <textarea class="default-textarea" type="text" name="descricao" class="form-control" id="descricao" placeholder="Descrição" value="<?php echo $descricao ?>"></textarea>
+        <textarea class="default-textarea" type="text" name="descricao" class="form-control" id="descricao" placeholder="Descrição"><?php echo $descricao ?></textarea>
       </div>
       <div class="col-md-12 input-with-icon">
         <i class="fas fa-phone-alt icon"></i>

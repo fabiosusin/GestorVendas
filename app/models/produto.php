@@ -16,13 +16,16 @@ class Produto
 
 	private $FornecedorID;
 
-	public function __construct($id, $nome, $descricao, $fotoUrl, $FornecedorID)
+	private $fornecedorNome;
+
+	public function __construct($id, $nome, $descricao, $fotoUrl, $FornecedorID, $fornecedorNome)
 	{
 		$this->id = $id;
 		$this->nome = $nome;
 		$this->descricao = $descricao;
 		$this->fotoUrl = $fotoUrl;
 		$this->FornecedorID = $FornecedorID;
+		$this->fornecedorNome = $fornecedorNome;
 	}
 
 	//Métodos Getters e Setters
@@ -51,6 +54,11 @@ class Produto
 		return $this->FornecedorID;
 	}
 
+	public function getFornecedor()
+	{
+		return $this->fornecedorNome;
+	}
+
 
 	public function setId($id)
 	{
@@ -75,5 +83,10 @@ class Produto
 	public function setFornecedorID($FornecedorID)
 	{
 		$this->FornecedorID = $FornecedorID;
+	}
+
+	public function setFornecedor($fornecedorNome)
+	{
+		$this->fornecedorNome = $fornecedorNome;
 	}
 }

@@ -13,7 +13,7 @@ include '../../../scripts/product/register/get_product.php';
     <input type="hidden" name="id" value="<?php echo $id ?>" />
     <div class="photo">
       <button type="button" class="content" name="btn-photo">
-        <div class="image" name="image-product">
+        <div class="image" name="image-product" style="<?php echo ' display: ' . ($picture != null ? 'flex' : 'none') . '; background-image:url(' . $picture . ')' ?>">
           <a class="remove-picture" name="remove-picture"><i class="fas fa-times"></i></a>
         </div>
         <i class="fas fa-camera" name="icon"></i>

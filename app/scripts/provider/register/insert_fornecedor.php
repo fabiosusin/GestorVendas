@@ -23,15 +23,25 @@ $cep = $_POST['cep'];
 $cidade = $_POST['cidade'];
 $estado = $_POST['estado'];
 
-
+$address = null;
 $provider = new Fornecedor($id, $nome, $descricao, $telefone, $email);
-$address = new Endereco('', $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado, '', $id);
 if (!empty($id)) {
 	$providerDAO->atualizar($provider);
-//	$addressDAO->atualizar($address);
-} else {
+	$address = $addressDAO->carregarIdFornecedor($id);
+} else
 	$providerDAO->inserir($provider);
-//	$addressDAO->inserir($address);
+
+if ($address == null)
+	$addressDAO->inserirEnderecoFornecedor(new Endereco('', $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado, '', $id));
+else {
+	$address->setRua($rua);
+	$address->setNumero($numero);
+	$address->setComplemento($complemento);
+	$address->setBairro($bairro);
+	$address->setCep($cep);
+	$address->setCidade($cidade);
+	$address->setEstado($estado);
+	$addressDAO->atualizar($address);
 }
 
 header('location:/gestorvendas/app/pages/provider/list/list-provider.php');

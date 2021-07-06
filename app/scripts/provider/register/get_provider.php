@@ -3,6 +3,7 @@
 
 include '../../../DAO/mySqlDao.php';
 include '../../../models/fornecedor.php';
+include '../../../models/endereco.php';
 include '../../../DAO/fornecedorDAO.php';
 include '../../../DAO/enderecoDAO.php';
 
@@ -27,7 +28,7 @@ if (!empty($id)) {
     if (!isset($provider))
         return;
 
-    $nome = $provider->getnome();
+    $nome = $provider->getNome();
     $descricao = $provider->getDescricao();
     $telefone = $provider->getTelefone();
     $email = $provider->getEmail();
