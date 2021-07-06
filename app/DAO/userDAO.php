@@ -165,6 +165,35 @@ class UserDAO
         return new User($id, $senha, $nome, $email, $telefone, $cartao, $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado);
     }
 
+    public function getByName($nome)
+    {
+        if (empty($nome))
+            return null;
+
+        $query = "SELECT * FROM cliente WHERE nome = :nome";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nome', $nome);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row == null)
+            return;
+        $nome = $row['nome'];
+        $cartao = $row['cartaoCredito'];
+        $telefone = $row['telefone'];
+        $email = $row['email'];
+        $senha = $row['senha'];
+        $rua = '';
+        $numero = '';
+        $complemento = '';
+        $bairro = '';
+        $cep = '';
+        $cidade = '';
+        $estado = '';
+
+        return new User($row['id'], $senha, $nome, $email, $telefone, $cartao, $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado);
+    }
+
     public function getByUserAndPassword($user, $pass)
     {
 

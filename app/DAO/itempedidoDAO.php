@@ -1,8 +1,4 @@
 <?php
-
-	
-
-	   
 class ItempedidoDAO{
 
 	public function __construct()
@@ -31,12 +27,17 @@ class ItempedidoDAO{
 	}
 	
 	//Lista todos os elementos da tabela listando ordenados por uma coluna específica
-	public function listarTodosOrgenandoPor($coluna){
+	public function listarProtudosPorVendaId($id){
 		
-		$sql = 'SELECT * FROM itempedido ORDER BY '.$coluna;
+		$sql = 'SELECT * FROM produto LEFT JOIN itempedido ON produto.id = itempedido.ProdutoID where itempedido.ProdutoID IS NOT NULL and PedidoID = :id';
 		$consulta = $this->conn->prepare($sql);
+		$consulta->bindValue(":id",$id);
 		$consulta->execute();
-		return ($consulta->fetchAll(PDO::FETCH_ASSOC));
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+            $orderItems[] = new Itempedido($row['id'], $row['quantidade'], $row['preco'], $row['ProdutoID'], $row['PedidoID'], $row['nome'], $row['fotoUrl'], $row['descricao']);
+        }
+
+        return isset($orderItems) ? $orderItems : null;
 	}
 	
 	//Apaga um elemento da tabela
@@ -68,7 +69,7 @@ class ItempedidoDAO{
 			return true;
 		else
 			return false;
-	}conn
+	}
 	
 	//Atualiza um conno na tabela
 	public function atualizar($itempedido){
@@ -84,9 +85,9 @@ class ItempedidoDAO{
 		$consulta->bindValue(':PedidoID',$itempedido->getPedidoID()); 
 
 		$consulta->bindValue(':ProdutoID',$itempedido->getProdutoID()); 
-		if($consuconnecute())
+		if($consulta->execute())
 			return true;
-		elseconn
+		else
 			return false;
 	}
 
@@ -101,4 +102,3 @@ class ItempedidoDAO{
 			return false;
 	}
 }
-?>

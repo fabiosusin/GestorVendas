@@ -4,6 +4,7 @@ session_start();
 $user = $_SESSION['usuario'] ?? '';
 $admin = $_SESSION['admin'] ?? false;
 $logged = $_SESSION['logged'] ?? false;
+$userName = $_SESSION['nomeUsuario'] ?? '';
 
 ?>
 <!DOCTYPE html>
@@ -45,14 +46,24 @@ $logged = $_SESSION['logged'] ?? false;
             <i class="fas fa-search icon"></i>
             <input class="default-input" placeholder="Pesquisar Produtos" />
         </form>
-        <div class="buttons <?php echo ($admin ? 'w-120' : '') ?>">
+        <div class="buttons w-120">
             <?php
             if (!$logged)
                 echo '<a href="/GestorVendas/app/pages/login/login.php"><i class="fas fa-user"></i></a>';
             else if ($logged && !$admin)
                 echo '
-                <a href="../../scripts/logout/logout.php"><i class="fas fa-sign-out-alt"></i></a>
-                <a href="/GestorVendas/app/pages/cart/cart.php"><i class="fas fa-shopping-bag"></i></a>';
+                <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-align-justify"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item"> <span>Bem Vindo ' . $userName . '</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/orders/orders.php"><span>Minhas Vendas</span></a>
+                    <a class="dropdown-item" href="../../scripts/logout/logout.php"> <span>Sair</span></a>
+                </div>
+                <a href="/GestorVendas/app/pages/cart/cart.php"><i class="fas fa-shopping-bag"></i></a>
+                ';
             else {
                 echo '<div class="dropdown show">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,9 +71,10 @@ $logged = $_SESSION['logged'] ?? false;
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="/GestorVendas/app/pages/user/list/list-user.php"><span> Usuário</span></a>
-                    <a class="dropdown-item" href="/GestorVendas/app/pages/provider/list/list-provider.php"> <span>Fornecedor</span></a>
-                    <a class="dropdown-item" href="/GestorVendas/app/pages/product/list/list-product.php"> <span>Produto</span></a>
+                <a class="dropdown-item" href="/GestorVendas/app/pages/orders/orders.php"><span>Vendas</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/user/list/list-user.php"><span> Usuários</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/provider/list/list-provider.php"> <span>Fornecedores</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/product/list/list-product.php"> <span>Produtos</span></a>
                     <a class="dropdown-item" href="/GestorVendas/app/pages/stock/list/list-stock.php"> <span>Estoque</span></a>
                     <a class="dropdown-item" href="../../scripts/logout/logout.php"> <span>Sair</span></a>
                 </div>

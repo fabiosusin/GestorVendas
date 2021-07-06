@@ -5,6 +5,24 @@ h1 {
     font-weight: bold;
 }
 
+.page .filters {
+    margin-top: 60px;
+    margin-bottom: -40px;
+}
+
+.page .default-input {
+    margin-right: 15px;
+    border: 2px solid var(--main-color);
+    color: #fff;
+}
+
+.page .default-button {
+    width: 130px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+
 .orders {
     margin-top: 60px;
 }
@@ -13,6 +31,13 @@ h1 {
     border: 2px solid var(--main-color);
     border-radius: 5px;
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.orders .order .save .default-button {
+    border-radius: 3px;
 }
 
 .orders .order .header-info {
@@ -36,6 +61,20 @@ h1 {
     margin-top: 20px;
 }
 
+.orders .order .header-info .info.w-date {
+    width: 170px;
+}
+
+.orders .order .header-info .info input {
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.orders .order .header-info .info select {
+    width: 100%;
+    height: 40px;
+}
+
 .orders .order .header-info .info .title {
     font-weight: bold;
 }
@@ -45,21 +84,25 @@ h1 {
     text-align: center;
 }
 
+.orders .order .products {
+    width: 100%;
+}
+
 .orders .order .products .product {
     width: 100%;
     height: auto;
-    min-height: 100px;
-    max-height: 100px;
+    min-height: 120px;
+    max-height: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-top: 2px solid var(--main-color);
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 10px 20px;
 }
 
 .orders .order .products .product .item {
-    height: 100%;
+    height: 100px;
     width: 33%;
     display: flex;
     justify-content: space-around;
@@ -129,8 +172,8 @@ h1 {
     margin-right: 10px;
 }
 
-.paginator .page-size select {
-    background: transparent;
+.page select {
+    background: var(--background-color);
     border: 2px solid var(--main-color);
     width: 60px;
     height: 30px;
@@ -156,11 +199,9 @@ h1 {
     .orders .order .products .product {
         max-height: none;
     }
-
     .orders .order .products .product .item .quantity {
         width: 30%;
     }
-
     .orders .order .products .product .item {
         width: 50%;
         margin-bottom: 20px;

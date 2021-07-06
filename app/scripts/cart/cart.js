@@ -48,18 +48,21 @@
     main.getProducts = () => {
         const ids = main.$container('[name=productId]');
         const quantities = main.$container('[name=quantity]');
+        const prices = main.$container('[name=price]');
 
         let idx = 0;
         let id = ids[idx];
         let quantity = quantities[idx];
+        let price = prices[idx];
 
         const data = [];
         while (id) {
             ++idx;
-            data.push({ id: +id.value, quantity: +quantity.value });
+            data.push({ id: +id.value, quantity: +quantity.value, price: main.textToNumber(price.textContent) });
 
             id = ids[idx];
             quantity = quantities[idx];
+            price = prices[idx];
         }
 
         return data;
@@ -119,6 +122,7 @@
             url: '../../pages/cart/cart-validate.php',
             data: { data: JSON.stringify(data) },
             success: function(msg) {
+                console.log(msg)
                 if (msg)
                     main.plotTotal({ spanClass: 'error', message: msg });
                 else
@@ -127,12 +131,16 @@
         });
     }
     main.createSale = () => {
+        const data = main.getProducts();
+
         $.ajax({
             type: 'POST',
             dataType: 'html',
             url: '../../pages/cart/create-sale.php',
-            success: function() {
-                window.location.href = path;
+            data: { data: JSON.stringify(data) },
+            success: function(s) {
+                console.log(s)
+                    //window.location.href = 'http://localhost/GestorVendas/app/pages/home/site.php';
             }
         });
     }

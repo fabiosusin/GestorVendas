@@ -54,12 +54,10 @@ CREATE TABLE Estoque (
 
 CREATE TABLE Pedido (
     id int NOT NULL AUTO_INCREMENT,
-	numero int NOT NULL,
     dataPedido date NOT NULL,
-	dataEntrega date NOT NULL,
-	situacao VARCHAR(10) NOT NULL,
-	ClienteID int NOT NULL, 
-	ProdutoID int NOT NULL,
+	dataEntrega date,
+	situacao VARCHAR(255) NOT NULL,
+	ClienteID int NOT NULL,
 	FOREIGN KEY (ClienteID) REFERENCES Cliente(id),
 	FOREIGN KEY (ProdutoID) REFERENCES Produto(id),
 	PRIMARY KEY (id)

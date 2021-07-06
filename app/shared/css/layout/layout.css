@@ -32,14 +32,10 @@ header {
 }
 
 header .buttons {
-    width: 70px;
+    width: 120px;
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-}
-
-header .buttons.w-120 {
-    width: 120px;
 }
 
 header .logo,
@@ -48,27 +44,8 @@ header .buttons a {
     color: var(--main-color);
 }
 
-header .buttons a:hover {
-    color: var(--main-color);
-}
-
 header .buttons a i {
     font-size: 20px;
-}
-
-header .buttons a span {
-    width: 100%;
-}
-
-.open>.dropdown-menu {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
-
-.dropdown-menu .dropdown-item {
-    min-width: 140px;
-    margin: 5px;
 }
 
 body {
@@ -231,32 +208,17 @@ main {
     background-color: var(--background-color);
 }
 
-.list-page {
-    width: 80%;
-    height: 100vh;
-    margin-top: 80px;
-}
-
-.list-page .bg-btn {
-    width: 100%;
+.open>.dropdown-menu {
     display: flex;
-    justify-content: flex-end;
-}
-
-table .edit {
-    color: var(--main-color);
-}
-
-.list-page .bg-btn .btn-success {
-    height: 70px;
-    font-weight: bold;
-    background: var(--main-color);
-    width: 70px;
-    border-radius: 90px;
-    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+    width: 160px;
+}
+
+.open>.dropdown-menu .dropdown-item {
+    width: 100%;
+    margin: 5px;
 }
 
 
@@ -270,12 +232,6 @@ table .edit {
 
 @media (max-width: 700px) {
     .form {
-        width: 100%;
-    }
-    header .buttons.w-120 {
-        width: 70px;
-    }
-    .list-page {
         width: 100%;
     }
 }

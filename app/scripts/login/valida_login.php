@@ -13,10 +13,12 @@ $admin = $senha == 'nest' && $usuario == 'teste@teste.com';
 $user = $userDAO->getByUserAndPassword($usuario, $senha);
 if (isset($user) || $admin) {
 	session_start();
+	$_SESSION['usuarioId'] = $admin ? '' : $user->getId();
 	$_SESSION['usuario'] = $usuario;
+	$_SESSION['nomeUsuario'] = $admin ? '' : $user->getNome();
 	$_SESSION['admin'] = $admin;
 	$_SESSION['logged'] = true;
 
 	header('location:../../pages/home/site.php');
-} //else
-	//header('location:/gestorvendas/app/pages/login/login.php');
+} else
+	header('location:/gestorvendas/app/pages/login/login.php');
