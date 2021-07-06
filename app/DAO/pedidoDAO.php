@@ -56,19 +56,24 @@ class PedidoDAO
 	public function listarVendasCliente($id, $clientId, $limit, $skip)
 	{
 
-
 		$offset = '';
 		if (isset($skip) && $skip > 0)
 			$offset = ' OFFSET ' . $skip . '';
 
+
+		$clientWhere = '';
+		if ($clientId != '')
+			$clientWhere  = 'ClienteID = :clienteId';
+
 		$where = '';
 		if ($id != 0)
-			$where  = 'and id = :id';
+			$where  = ($clientWhere == '' ? '' : ' and ') . 'id = :id';
 
-		$sql = 'SELECT * FROM pedido WHERE ClienteID = :clienteId ' . $where . ' limit ' . $limit . '' . $offset . '';
+		$sql = 'SELECT * FROM pedido WHERE ' . $clientWhere . ' ' . $where . ' limit ' . $limit . '' . $offset . '';
 		$consulta = $this->conn->prepare($sql);
 
-		$consulta->bindValue(':clienteId', $clientId);
+		if ($clientId != '')
+			$consulta->bindValue(':clienteId', $clientId);
 		if ($id != 0)
 			$consulta->bindValue(':id', $id);
 		$consulta->execute();

@@ -27,10 +27,25 @@ class EstoqueDAO
 		return isset($stock) ? $stock : null;
 	}
 
+	public function carregarProdutoID($id)
+	{
+
+		$sql = 'SELECT * FROM estoque WHERE ProdutoID = :id';
+		$consulta = $this->conn->prepare($sql);
+		$consulta->bindValue(":id", $id);
+		echo $consulta->queryString;
+		$consulta->execute();
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$stock = new Estoque($row['id'], $row['quantidade'], $row['preco'], $row['ProdutoID']);
+		}
+
+		return isset($stock) ? $stock : null;
+	}
+
 	//Lista todos os elementos da tabela
 	public function listarTodos()
 	{
-		$sql = 'SELECT * FROM estoque LEFT JOIN produto ON produto.id = estoque.ProdutoID';
+		$sql = 'SELECT estoque.*, produto.nome FROM estoque LEFT JOIN produto ON produto.id = estoque.ProdutoID';
 		$consulta = $this->conn->prepare($sql);
 		$consulta->execute();
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {

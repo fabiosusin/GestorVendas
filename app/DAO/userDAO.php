@@ -170,7 +170,8 @@ class UserDAO
         if (empty($nome))
             return null;
 
-        $query = "SELECT * FROM cliente WHERE nome = :nome";
+        $nome =  '%' . $nome . '%';
+        $query = "SELECT * FROM cliente WHERE nome like :nome";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nome', $nome);
         $stmt->execute();

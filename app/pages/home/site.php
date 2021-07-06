@@ -7,7 +7,7 @@ include_once("../base/header.php");
 include_once("../../scripts/conexao/conexao.php");
 
 $name = isset($_GET['name']) ? $_GET['name'] : '';
-$where = 'where estoque.ProdutoID IS NOT NULL';
+$where = 'where estoque.ProdutoID IS NOT NULL and quantidade > 0';
 if (isset($name))
   $where .= " and produto.nome like '%$name%'";
 

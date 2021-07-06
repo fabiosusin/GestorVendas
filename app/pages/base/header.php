@@ -42,9 +42,9 @@ $userName = $_SESSION['nomeUsuario'] ?? '';
         <a class="logo" href="/GestorVendas/app/pages/home/site.php">
             NEST
         </a>
-        <form class="search input-with-icon">
+        <form class="search input-with-icon"  method="get" action="../../pages/home/site.php">
             <i class="fas fa-search icon"></i>
-            <input class="default-input" placeholder="Pesquisar Produtos" />
+            <input class="default-input" placeholder="Pesquisar Produtos" name="name" />
         </form>
         <div class="buttons w-120">
             <?php

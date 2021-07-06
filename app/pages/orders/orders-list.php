@@ -46,7 +46,7 @@ if (!isset($orders))
 
 foreach ($orders as $order) {
   $order->setItems($orderItemsDAO->listarProtudosPorVendaId($order->getId()));
-  if ($admin)
+  if (!$admin)
     $order->setCliente($userName);
   else {
     $user = $userDao->getById($order->getClienteID());
@@ -103,10 +103,12 @@ if (isset($orders)) {
         </select>
         </div>' : '<span class="info">' . $order->getSituacao() . '</span>';
 
+    $saveBtn = $admin ? '<div class="save"><button class="default-button" name="filter">Salvar</button></div>' : '';
+
     echo '
     <form class="order" method="post" action="../../scripts/orders/save_order.php">
           <input type="hidden" name="id" value="' . $order->getId() . '"/>
-          <div class="save"><button class="default-button" name="filter">Salvar</button></div>
+          ' . $saveBtn . '
           <div class="header-info">
             <div class="info">
               <span class="title">Código</span>

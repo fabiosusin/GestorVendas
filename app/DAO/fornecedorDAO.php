@@ -18,9 +18,9 @@ class FornecedorDAO
 		$consulta->bindValue(":id", $id);
 		$consulta->execute();
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $providers = new Fornecedor($row['id'], $row['nome'], $row['descricao'], $row['telefone'], $row['email']);
-        }
-        return $providers;
+			$providers = new Fornecedor($row['id'], $row['nome'], $row['descricao'], $row['telefone'], $row['email']);
+		}
+		return $providers;
 	}
 
 	//Lista todos os elementos da tabela
@@ -31,10 +31,10 @@ class FornecedorDAO
 		$consulta = $this->conn->prepare($sql);
 		$consulta->execute();
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $providers[] = new Fornecedor($row['id'], $row['nome'], $row['descricao'], $row['telefone'], $row['email']);
-        }
+			$providers[] = new Fornecedor($row['id'], $row['nome'], $row['descricao'], $row['telefone'], $row['email']);
+		}
 
-        return isset($providers) ? $providers : null;
+		return isset($providers) ? $providers : null;
 	}
 
 	//Lista todos os elementos da tabela listando ordenados por uma coluna específica
@@ -72,17 +72,29 @@ class FornecedorDAO
 		$consulta->bindValue(':telefone', $fornecedor->getTelefone());
 
 		$consulta->bindValue(':email', $fornecedor->getEmail());
-		
+
 		if ($consulta->execute())
 			return true;
 		else
 			return false;
 	}
 
+	public function GetLastId()
+	{
+		$sql = 'SELECT MAX(Id) FROM fornecedor';
+		$consulta = $this->conn->prepare($sql);
+		$consulta->execute();
+		$id = '';
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$id = $row['MAX(Id)'];
+		}
+		return $id;
+	}
+
 	//Atualiza um conno na tabela
 	public function atualizar($fornecedor)
 	{
-		
+
 		$sql = 'UPDATE fornecedor SET id = :id, nome = :nome, descricao = :descricao, telefone = :telefone, email = :email WHERE id = :id';
 		$consulta = $this->conn->prepare($sql);
 		$consulta->bindValue(':id', $fornecedor->getId());
@@ -103,7 +115,7 @@ class FornecedorDAO
 	//Apaga todos os elementos da tabela
 	public function limparTabela()
 	{
-		
+
 		$sql = 'DELETE FROM fornecedor';
 		$consulta = $this->conn->prepare($sql);
 		if ($consulta->execute())

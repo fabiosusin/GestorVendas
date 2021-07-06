@@ -12,7 +12,7 @@ $type = $_POST['type'];
 $quantity = $_POST['quantity'];
 $price = $_POST['price'];
 
-$stock = $stockDAO->carregar($id);
+$stock = isset($id) && $id != '' ? $stockDAO->carregar($id) : $stockDAO->carregarProdutoID($productId);
 $currentQuantity =  isset($stock) ?  $stock->getQuantidade() : 0;
 if (isset($price)) {
     $price = (float)str_replace(',', '.', $price);
@@ -20,6 +20,10 @@ if (isset($price)) {
 
 $quantity *= $type == 'Entrada' ? 1 : -1;
 $quantity += $currentQuantity;
+
+if (empty($id) && $stock != null)
+    $id = $stock->getId();
+
 if (!empty($id))
     $stockDAO->atualizar(new Estoque($id, $quantity, $price, $productId));
 else

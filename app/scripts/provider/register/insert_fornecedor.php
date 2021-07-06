@@ -31,6 +31,7 @@ if (!empty($id)) {
 } else
 	$providerDAO->inserir($provider);
 
+	$id = $providerDAO->GetLastId();
 if ($address == null)
 	$addressDAO->inserirEnderecoFornecedor(new Endereco('', $rua, $numero, $complemento, $bairro, $cep, $cidade, $estado, '', $id));
 else {

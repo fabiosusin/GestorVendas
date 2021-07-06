@@ -17,6 +17,7 @@ $quantity = '';
 $price = '';
 
 $stock = $stockDAO->carregar($id);
+echo $id;
 if (!isset($stock))
     return;
 

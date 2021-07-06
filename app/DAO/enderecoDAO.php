@@ -23,7 +23,7 @@ class EnderecoDAO
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $address = new Endereco($row['id'], $row['rua'], $row['numero'], $row['complemento'], $row['bairro'], $row['cep'], $row['cidade'], $row['estado'], $row['ClienteID'], $row['FornecedorID']);
         }
-        return $address;
+        return isset($address) ? $address : null;
 	}
 
 	//Lista todos os elementos da tabela
