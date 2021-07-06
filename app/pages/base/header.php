@@ -59,7 +59,7 @@ $userName = $_SESSION['nomeUsuario'] ?? '';
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item"> <span>Bem Vindo ' . $userName . '</span></a>
-                    <a class="dropdown-item" href="/GestorVendas/app/pages/orders/orders.php"><span>Minhas Vendas</span></a>
+                    <a class="dropdown-item" href="/GestorVendas/app/pages/orders/orders.php"><span>Minhas Compras</span></a>
                     <a class="dropdown-item" href="../../scripts/logout/logout.php"> <span>Sair</span></a>
                 </div>
                 <a href="/GestorVendas/app/pages/cart/cart.php"><i class="fas fa-shopping-bag"></i></a>

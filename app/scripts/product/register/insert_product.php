@@ -19,7 +19,10 @@ if ($realName != '') {
     copy($tempName, '../../../' . $pathName);
 }
 
-$product = new Produto($id, $name, $description, $pathName, $providerId,'');
+if ($pathName == '')
+    $pathName = $_POST['picture_current'];
+
+$product = new Produto($id, $name, $description, $pathName, $providerId, '');
 if (!empty($id))
     $productDAO->atualizar($product);
 else

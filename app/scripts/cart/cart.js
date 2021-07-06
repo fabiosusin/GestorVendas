@@ -138,9 +138,10 @@
             dataType: 'html',
             url: '../../pages/cart/create-sale.php',
             data: { data: JSON.stringify(data) },
-            success: function(s) {
-                console.log(s)
-                    //window.location.href = 'http://localhost/GestorVendas/app/pages/home/site.php';
+            success: function() {
+                window.location.href = 'http://localhost/GestorVendas/app/pages/home/site.php';
+                localStorage.removeItem('productsId');
+                main.$container("[name=total-price-infos]").html('');
             }
         });
     }

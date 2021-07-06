@@ -31,6 +31,11 @@ class Pedido
 		$this->ClienteID = $ClienteID;
 	}
 
+	public function getDadosParaJSON()
+	{
+		$data = ['id' => $this->id, 'dataPedido' => $this->dataPedido, 'dataEntrega' => $this->dataEntrega, 'situacao' => $this->situacao, 'clienteId' => $this->ClienteID];
+		return $data;
+	}
 
 	//Métodos Getters e Setters
 	public function getId()
@@ -72,7 +77,7 @@ class Pedido
 	{
 		return $this->precoTotal;
 	}
-	
+
 	public function getItems()
 	{
 		return $this->items;

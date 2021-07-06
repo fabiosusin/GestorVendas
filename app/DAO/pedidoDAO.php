@@ -22,6 +22,19 @@ class PedidoDAO
 		return $order;
 	}
 
+	public function carregarJSON($id)
+	{
+
+		$sql = 'SELECT * FROM pedido WHERE id = :id';
+		$consulta = $this->conn->prepare($sql);
+		$consulta->bindValue(":id", $id);
+		$consulta->execute();
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$order[] = new Pedido($row['id'], $row['dataPedido'], $row['dataEntrega'], $row['situacao'], $row['ClienteID']);
+		}
+		return isset($order) ? $order : null;
+	}
+
 	//Lista todos os elementos da tabela
 	public function listarTodos($limit, $skip)
 	{
@@ -64,6 +77,17 @@ class PedidoDAO
 		}
 
 		return isset($orders) ? $orders : null;
+	}
+
+	public function buscaPedidosJSON($orders)
+	{
+		if ($orders == null)
+			return;
+		$ordersJSON = array();
+		foreach ($orders as $order) {
+			$ordersJSON[] = $order->getDadosParaJSON();
+		}
+		return stripslashes(json_encode($ordersJSON, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 	}
 
 	//Apaga um elemento da tabela

@@ -30,12 +30,11 @@ class EstoqueDAO
 	//Lista todos os elementos da tabela
 	public function listarTodos()
 	{
-
-		$sql = 'SELECT * FROM estoque';
+		$sql = 'SELECT * FROM estoque LEFT JOIN produto ON produto.id = estoque.ProdutoID';
 		$consulta = $this->conn->prepare($sql);
 		$consulta->execute();
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-			$stocks[] = new Estoque($row['id'], $row['quantidade'], $row['preco'], $row['ProdutoID']);
+			$stocks[] = new Estoque($row['id'], $row['quantidade'], $row['preco'], $row['nome']);
 		}
 
 		return isset($stocks) ? $stocks : null;

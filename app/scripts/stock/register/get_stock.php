@@ -20,6 +20,5 @@ $stock = $stockDAO->carregar($id);
 if (!isset($stock))
     return;
 
-$quantity =  $stock->getQuantidade();
 $price =  $stock->getPreco();
 $productId = $stock->getProdutoID();

@@ -14,7 +14,7 @@ include_once("../../base/header.php");
     <table class="table table-hover table-striped" id="provider">
         <thead>
             <tr>
-                <th>Código do produto</th>
+                <th>Produto</th>
                 <th>Quantidade</th>
                 <th>Preço</th>
                 <th>Editar</th>

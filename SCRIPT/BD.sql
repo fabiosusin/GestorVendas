@@ -59,7 +59,6 @@ CREATE TABLE Pedido (
 	situacao VARCHAR(255) NOT NULL,
 	ClienteID int NOT NULL,
 	FOREIGN KEY (ClienteID) REFERENCES Cliente(id),
-	FOREIGN KEY (ProdutoID) REFERENCES Produto(id),
 	PRIMARY KEY (id)
 );
 
